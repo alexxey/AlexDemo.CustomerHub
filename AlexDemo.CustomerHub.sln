@@ -18,7 +18,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.DataAccess.EF", "Integration\AlexDemo.CustomerHub.DataAccess.EF\AlexDemo.CustomerHub.DataAccess.EF.csproj", "{3C359BCA-494B-4E5E-8560-17C1F49134DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Services", "Integration\AlexDemo.CustomerHub.Services\AlexDemo.CustomerHub.Services.csproj", "{430BE103-320C-4C39-A3E8-548148E82FAE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0905E03B-8F1D-4CB1-9C80-6D4E5615F521}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{11BBB9FB-5FD2-412D-926F-075297CE0C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Core.Application.UnitTests", "Tests\Unit\AlexDemo.CustomerHub.Core.Application.UnitTests\AlexDemo.CustomerHub.Core.Application.UnitTests.csproj", "{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,10 +50,10 @@ Global
 		{3C359BCA-494B-4E5E-8560-17C1F49134DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C359BCA-494B-4E5E-8560-17C1F49134DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C359BCA-494B-4E5E-8560-17C1F49134DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{430BE103-320C-4C39-A3E8-548148E82FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{430BE103-320C-4C39-A3E8-548148E82FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{430BE103-320C-4C39-A3E8-548148E82FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{430BE103-320C-4C39-A3E8-548148E82FAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,7 +64,8 @@ Global
 		{CA95262D-D82F-46A6-A88A-D891E273A112} = {2755506A-E561-4173-A74A-9AF8179F6E64}
 		{2EC52984-4627-4405-B83C-A0B85153366A} = {2755506A-E561-4173-A74A-9AF8179F6E64}
 		{3C359BCA-494B-4E5E-8560-17C1F49134DE} = {4AF7F813-F3B2-4BB7-B5C7-09D02746BA0B}
-		{430BE103-320C-4C39-A3E8-548148E82FAE} = {4AF7F813-F3B2-4BB7-B5C7-09D02746BA0B}
+		{11BBB9FB-5FD2-412D-926F-075297CE0C23} = {0905E03B-8F1D-4CB1-9C80-6D4E5615F521}
+		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1} = {11BBB9FB-5FD2-412D-926F-075297CE0C23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FCDB9F1-357C-444C-8FBA-9ECCAE35A3C4}

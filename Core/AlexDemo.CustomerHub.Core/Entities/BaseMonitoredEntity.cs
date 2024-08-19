@@ -5,6 +5,6 @@
         /// <summary>
         /// field to handle update/concurrency issues
         /// </summary>
-        public required byte[] RowVersion { get; set; }
+        public byte[]? RowVersion { get; set; }
     }
 }

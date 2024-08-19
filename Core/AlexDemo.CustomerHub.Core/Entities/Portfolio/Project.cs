@@ -3,7 +3,7 @@ using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Entities.Portfolio
 {
-    public class Project : BaseMonitoredEntity
+    public sealed class Project : BaseMonitoredEntity
     {
         public int Id { get; set; }
 

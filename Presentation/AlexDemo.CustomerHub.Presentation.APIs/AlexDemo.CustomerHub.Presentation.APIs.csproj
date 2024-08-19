@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\AlexDemo.CustomerHub.Core.Application\AlexDemo.CustomerHub.Core.Application.csproj" />
     <ProjectReference Include="..\..\Core\AlexDemo.CustomerHub.Core\AlexDemo.CustomerHub.Core.csproj" />
-    <ProjectReference Include="..\..\Integration\AlexDemo.CustomerHub.Services\AlexDemo.CustomerHub.Services.csproj" />
   </ItemGroup>
 
 </Project>

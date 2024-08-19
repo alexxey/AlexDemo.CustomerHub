@@ -1,4 +1,5 @@
-﻿using AlexDemo.CustomerHub.Core.Entities.Customer;
+﻿using AlexDemo.CustomerHub.Core.Constraints;
+using AlexDemo.CustomerHub.Core.Entities.Customer;
 using AlexDemo.CustomerHub.Core.Entities.Portfolio;
 using AlexDemo.CustomerHub.DataAccess.EF.Extensions;
 using AlexDemo.CustomerHub.DataAccess.EF.Settings;
@@ -60,17 +61,17 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Company>().Property(c => c.BrandName)
-                .HasMaxLength(DbConstants.CommonSettings.ShortStringLength)
+                .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength)
                 .IsRequired();
 
             modelBuilder.Entity<Company>().Property(c => c.CeoName)
-                .HasMaxLength(DbConstants.CommonSettings.MediumStringLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.MediumStringLength);
 
             modelBuilder.Entity<Company>().Property(c => c.Email)
-                .HasMaxLength(DbConstants.CommonSettings.EmailAddressLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.EmailAddressLength);
 
             modelBuilder.Entity<Company>().Property(c => c.WebSite)
-                .HasMaxLength(DbConstants.CommonSettings.LongStringLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.LongStringLength);
 
             modelBuilder.Entity<Company>().Property(c => c.Revenue)
                 .HasPrecision(15, 2);
@@ -103,15 +104,15 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<CompanyOffice>().Property(c => c.Name)
-                .HasMaxLength(DbConstants.CommonSettings.MediumStringLength)
+                .HasMaxLength(EntityConstraints.CommonSettings.MediumStringLength)
                 .IsRequired();
 
             modelBuilder.Entity<CompanyOffice>().Property(c => c.OfficeCode)
-                .HasMaxLength(DbConstants.CommonSettings.ShortStringLength)
+                .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength)
                 .IsRequired();
 
             modelBuilder.Entity<CompanyOffice>().Property(c => c.ZipCode)
-                .HasMaxLength(DbConstants.CommonSettings.ExtraShortLength)
+                .HasMaxLength(EntityConstraints.CommonSettings.ExtraShortStringLength)
                 .IsRequired();
 
             // indexes
@@ -134,27 +135,27 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<User>().Property(c => c.Login)
-                .HasMaxLength(DbConstants.Domain.UserSettings.LoginLength)
+                .HasMaxLength(EntityConstraints.Domain.UserSettings.LoginLength)
                 .IsRequired();
 
             modelBuilder.Entity<User>().Property(c => c.Title)
-                .HasMaxLength(DbConstants.CommonSettings.ExtraShortLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.ExtraShortStringLength);
 
             modelBuilder.Entity<User>().Property(c => c.FirstName)
-                .HasMaxLength(DbConstants.CommonSettings.ShortStringLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength);
 
             modelBuilder.Entity<User>().Property(c => c.LastName)
-                .HasMaxLength(DbConstants.CommonSettings.ShortStringLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength);
 
             modelBuilder.Entity<Company>().Property(c => c.Email)
-                .HasMaxLength(DbConstants.CommonSettings.EmailAddressLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.EmailAddressLength);
 
             modelBuilder.Entity<User>().Property(c => c.PasswordHash)
-                .HasMaxLength(DbConstants.Domain.UserSettings.PasswordHash)
+                .HasMaxLength(EntityConstraints.Domain.UserSettings.PasswordHash)
                 .IsRequired();
 
             modelBuilder.Entity<User>().Property(c => c.PasswordSalt)
-                .HasMaxLength(DbConstants.Domain.UserSettings.PasswordSalt)
+                .HasMaxLength(EntityConstraints.Domain.UserSettings.PasswordSalt)
                 .IsRequired();
 
             modelBuilder.Entity<User>().Property(c => c.DateOfBirth)
@@ -175,15 +176,15 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .HasKey(c => c.Id);
 
             modelBuilder.Entity<Project>().Property(c => c.ProjectCode)
-                .HasMaxLength(DbConstants.CommonSettings.ShortStringLength)
+                .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength)
                 .IsRequired();
 
             modelBuilder.Entity<Project>().Property(c => c.Name)
-                .HasMaxLength(DbConstants.CommonSettings.LongStringLength)
+                .HasMaxLength(EntityConstraints.CommonSettings.LongStringLength)
                 .IsRequired();
 
             modelBuilder.Entity<Project>().Property(c => c.Description)
-                .HasMaxLength(DbConstants.CommonSettings.ExtraLongStringLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.ExtraLongStringLength);
 
             modelBuilder.Entity<Project>().Property(c => c.ProjectBudget)
                 .HasPrecision(12, 2);
@@ -210,7 +211,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .HasColumnType(DbConstants.CommonSettings.DateTimeSecOnlyAccuracyFormat);
 
             modelBuilder.Entity<ProjectUser>().Property(c => c.PositionDescription)
-                .HasMaxLength(DbConstants.CommonSettings.ExtraLongStringLength);
+                .HasMaxLength(EntityConstraints.CommonSettings.ExtraLongStringLength);
         }
 
         private void ConfigureRelationships(ModelBuilder modelBuilder)
