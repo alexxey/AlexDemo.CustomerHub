@@ -20,8 +20,6 @@
     <Folder Include="UseCases\Common\Actions\Queries\" />
     <Folder Include="UseCases\Common\Handlers\Commands\" />
     <Folder Include="UseCases\Common\Handlers\Queries\" />
-    <Folder Include="UseCases\Customer\User\Handlers\Commands\" />
-    <Folder Include="UseCases\Customer\User\Actions\Commands\" />
   </ItemGroup>
 
 </Project>

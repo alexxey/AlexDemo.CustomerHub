@@ -19,5 +19,7 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User
         public required string Email { get; set; }
 
         public int PrimaryOfficeId { get; set; }
+
+        public int CompanyId { get; set; }
     }
 }

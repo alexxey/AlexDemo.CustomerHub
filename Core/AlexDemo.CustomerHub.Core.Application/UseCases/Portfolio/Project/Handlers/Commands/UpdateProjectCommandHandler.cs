@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Requests.Commands;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Handlers.Commands

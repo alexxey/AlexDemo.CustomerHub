@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User
 {
-    public record UpdateUserDto : BaseDto<int>
+    public record UpdateUserDto : BaseDto<int>, IBaseStatusDto
     {
         public string? FirstName { get; set; }
 

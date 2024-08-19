@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company.Constraints;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Requests.Commands;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handlers.Commands
@@ -23,12 +18,15 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
 
         public async Task<Unit> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
         {
-            // todo : add validation here
-            if (request.UpdateDto is not {Id: > 0})
+            var companyValidator = new UpdateCompanyDtoValidator();
+            var validationResult = await companyValidator.ValidateAsync(request.UpdateDto, cancellationToken);
+
+            if (!validationResult.IsValid)
             {
-                throw new ArgumentException(nameof(request));
+                throw new ArgumentException("Command details are not valid");
             }
 
+            // todo alex: health check can be executed on validator level, as an option - but we query company data anyway
             var companyToUpdate = await _companyRepository.GetById(request.UpdateDto.Id);
             if (companyToUpdate.Status == Status.Deleted)
             {

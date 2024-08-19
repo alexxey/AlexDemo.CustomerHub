@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Requests.Commands;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Actions.Commands;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.ProjectUser.Handlers.Commands
 {

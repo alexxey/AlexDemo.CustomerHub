@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project.Constraints
 {
@@ -14,6 +9,9 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project.Co
             RuleFor(r => r.Name)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull();
+
+            RuleFor(r => r.StartDate)
+                .GreaterThanOrEqualTo(DateTime.UtcNow).WithMessage("Project start time validation failed");
         }
     }
 }

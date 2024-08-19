@@ -18,11 +18,23 @@
 
         public static class Domain
         {
+            public static class CompanySettings
+            {
+                public const int BrandNameLength = 100;
+            }
+
+            public static class CompanyOfficeSettings
+            {
+                public const int OfficeNameLength = 100;
+            }
+
             public static class UserSettings
             {
                 public const int LoginLength = 75;
                 public const int PasswordHash = 128;
                 public const int PasswordSalt = 64;
+
+                public const int MinAllowedAge = 16;
             }
         }
     }

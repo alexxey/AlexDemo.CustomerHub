@@ -1,6 +1,6 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.ProjectUser;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.ProjectUser.Requests.Queries;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.ProjectUser.Actions.Queries;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.ProjectUser.Handlers.Queries
 {
