@@ -1,6 +1,6 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.CompanyOffice;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Requests.Queries;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Actions.Queries;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Handlers.Queries
 {

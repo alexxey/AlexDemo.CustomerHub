@@ -39,18 +39,22 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
 
             DefineCustomerConfiguration(modelBuilder);
 
-            DefineOfficeConfiguration(modelBuilder);
-
-            DefineUserConfiguration(modelBuilder);
-
-            DefineProjectConfiguration(modelBuilder);
-
-            DefineProjectUserConfiguration(modelBuilder);
+            DefineProfileConfiguration(modelBuilder);
 
             ConfigureRelationships(modelBuilder);
         }
 
+        #region Customer Configuration
         private void DefineCustomerConfiguration(ModelBuilder modelBuilder)
+        {
+            DefineCompanyConfiguration(modelBuilder);
+
+            DefineOfficeConfiguration(modelBuilder);
+
+            DefineUserConfiguration(modelBuilder);
+        }
+
+        private void DefineCompanyConfiguration(ModelBuilder modelBuilder)
         {
             // common structure and rules
             modelBuilder.Entity<Company>().ToTable(DbConstants.Domain.EntityNames.CompanyEntityName)
@@ -61,7 +65,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Company>().Property(c => c.BrandName)
-                .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength)
+                .HasMaxLength(EntityConstraints.Domain.CompanySettings.BrandNameLength)
                 .IsRequired();
 
             modelBuilder.Entity<Company>().Property(c => c.CeoName)
@@ -169,6 +173,15 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .IsUnique()
                 .HasDatabaseName("IX_UX_User_Login");
         }
+        #endregion
+
+        #region Profile Configuration
+        private void DefineProfileConfiguration(ModelBuilder modelBuilder)
+        {
+            DefineProjectConfiguration(modelBuilder);
+
+            DefineProjectUserConfiguration(modelBuilder);
+        }
 
         private void DefineProjectConfiguration(ModelBuilder modelBuilder)
         {
@@ -213,6 +226,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
             modelBuilder.Entity<ProjectUser>().Property(c => c.PositionDescription)
                 .HasMaxLength(EntityConstraints.CommonSettings.ExtraLongStringLength);
         }
+        #endregion
 
         private void ConfigureRelationships(ModelBuilder modelBuilder)
         {

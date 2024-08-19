@@ -7,5 +7,7 @@ namespace AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer
         public Task<List<User>> GetAllByCompany(int companyId);
 
         public Task<List<User>> GetAllByCompanyOffice(int companyOfficeId);
+
+        Task<bool> IsLoginUnique(string createDtoLogin, int createDtoCompanyId);
     }
 }

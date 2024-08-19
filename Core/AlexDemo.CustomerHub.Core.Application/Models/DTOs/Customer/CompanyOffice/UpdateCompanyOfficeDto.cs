@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.CompanyOffice
 {
-    public record UpdateCompanyOfficeDto : BaseDto<int>
+    public record UpdateCompanyOfficeDto : BaseDto<int>, IBaseStatusDto
     {
         public string? Name { get; set; }
 

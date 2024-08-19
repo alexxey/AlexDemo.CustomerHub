@@ -1,6 +1,6 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company.Constraints;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Requests.Commands;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Commands;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handlers.Commands
 {

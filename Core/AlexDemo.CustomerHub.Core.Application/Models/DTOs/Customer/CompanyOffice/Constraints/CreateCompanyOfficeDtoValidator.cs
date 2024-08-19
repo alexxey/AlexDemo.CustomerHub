@@ -1,4 +1,6 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
+using AlexDemo.CustomerHub.Core.Constraints;
+
 using FluentValidation;
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.CompanyOffice.Constraints
@@ -15,8 +17,9 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.CompanyOffi
             RuleFor(r => r.Name)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull()
-                .MaximumLength(50);  // todo : refer to constants;
+                .MaximumLength(EntityConstraints.Domain.CompanyOfficeSettings.OfficeNameLength);
 
+            // relationship checks
             RuleFor(r => r.CompanyId)
                 .GreaterThan(0).WithMessage("{PropertyName} must be a positive value")
                 .MustAsync(async (id, token) =>
@@ -26,6 +29,7 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.CompanyOffi
 
                 }).NotEmpty().WithMessage("{PropertyName} should be a valid reference");
 
+            // todo : load list of offices for the company to check name constraints
         }
     }
 }

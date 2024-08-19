@@ -1,6 +1,6 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project;
 
-namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Requests.Queries
+namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Actions.Queries
 {
     public class GetProjectDetailsRequest : IRequest<ProjectDetailsDto>
     {

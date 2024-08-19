@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project
 {
-    public record UpdateProjectDto : BaseDto<int>
+    public record UpdateProjectDto : BaseDto<int>, IBaseStatusDto
     {
         public decimal ProjectBudget { get; set; }
 

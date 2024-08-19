@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Requests.Queries;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Actions.Queries;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Handlers.Queries
 {
