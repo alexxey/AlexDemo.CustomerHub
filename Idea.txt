@@ -1,70 +1,45 @@
-I have nexr simple domain model:
+Next simple domain model:
 
-enumerations: 
+Enumerations: 
 	StatusEnum : enumeration (created, active, disabled, deleted)
 	CountryEnum : enumeration (UK, USA, Sweden, France)
 	ProjectStatusEnum : enumeration (idea, design, ...)
 	ProjectUserRole: enumeration (ProjectManager, QA, Developer, BusinessAnalyst ...)
 	CompanyPosition : enumeration (CEO, CFO, Director, Accountant, Developer, Manager ... )
 
-1) Application has list of companies (1Company entity)
+1) Application has list of companies (Company entity)
 	Company Entity Fields: 
 		- Id : int
-		- Name (unique) : string
-		- Country : CountryEnum
-		- Ceo : string
-		- Website : url
-		- EmployeesCount : int	
-		- Status : StatusEnum
-		
+		- Name (unique) : string		
+		...
 2) Each Company can have 1 or more Offices associated (CompanyOffice entity), 1 office is always marked as headOffice. It is not possible to have an office detached from a company
 	CompanyOffice Entity Fields:
 		- Id : int
 		- OfficeName : string 
 		- Code : string (unique per company)
-		- IsHeadOffice : bool
-		- Country: CountryEnum
-		- ZipCode: string 		
-		- Status : StatusEnumm
-		- EmployesCount: int
-		- CompanyID : int
-		
+		...		
 3) Each Company also has 0 or more employees (User entity), each employee has main office associated with. It is not possible to have a user without Company/HeadOffice
 	User Entity Fields:
 		- Id : int
 		- DateOfBirth : DateTime
 		- Login : string
-		- PasswordHash : string
-		- PasswordSalt : string
-		- Email
-		- CompanyPosition : CompanyPosition
-		- MainOfficeID : int 
-		- CompanyID : int
-		- Status : StatusEnum
-
+		...
 4) Company can have a list (0 or more) of Project entities. Each project has 1 owner user and several associated users.
 	Project Entity Fields: 
 		- Id : UUID
 		- CodeName : string (unique per Company), once created - immutable
 		- Name : string
 		- Description : string
-		- StartDate : DateTime
-		- ProjectBudget : decimal
-		- EndDate : DateTime (might be null)
-		- OfficeID : reference to the office that is responsible for the project 		
-		- ProjectStatus: ProjectStatusEnum		
-		- Status : StatusEnum					
-		
+		- StartDate : DateTime						
+		...
 5) ProjectUser entity : entity to store details when person joined the Project, that the occupation if the person and Tasks assigned
 	ProjectUser Entity Fields:
 		- ProjectID
 		- UserID
 		- StartDate: DateTime
-		- EndDate : DateTime (might be null)
-		- ProjectRole : ProjectUserRole
-		- PositionDescription : string
+		...
 
-functionality that I would like to implement in phase 1:
+functionality to be implemented in phase 1:
 1) For individual user to be able to login into application - to see List of projects that user participates in (or used to participate) : an ability to search by CodeName, date range, status
 2) an ability to create a new Project, define dates, details, budget, assign Project owner
 3) an ability to edit current project details (change status, update description, StartDate, EndDate, change Project Owner)
@@ -77,9 +52,3 @@ Layers of Application:
 - have some Transport/DTOs model to encapsulate main domain model (do not expose it fully)
 3) Presentation.Api - WebApi application that returns application models to consumers (web applications and mobile devices)
 4) Presenation.WebUI - MVC core application to provide UI/functionality for users to manage Projects
-
-Questions:
-1) using the clean architecture approach and SOLID/GRASP practices - where I should define and design DataAccess and BusinessLogic (Services) layer?
-2) what transport/View models I should define for the first drop
-3) what Endpoints to manage Project I need to define in WebApi and WebUI projects?
-
