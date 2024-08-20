@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
+﻿using AlexDemo.CustomerHub.Core.Application.Exceptions;
+using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project.Constraints;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Actions.Commands;
 
@@ -23,9 +18,12 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Handl
 
         public async Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
         {
-            if (request.CreateDto == null)
+            var projectDtoValidator = new CreateProjectDtoValidator();
+
+            var validationResult = await projectDtoValidator.ValidateAsync(request.CreateDto, cancellationToken);
+            if (!validationResult.IsValid)
             {
-                throw new ArgumentException("Command details are not provided");
+                throw new ValidationException(validationResult);
             }
 
             var project = _mapper.Map<Entities.Portfolio.Project>(request.CreateDto);

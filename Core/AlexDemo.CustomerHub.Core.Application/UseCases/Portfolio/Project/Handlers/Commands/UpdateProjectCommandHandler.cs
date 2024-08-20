@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
+﻿using AlexDemo.CustomerHub.Core.Application.Exceptions;
+using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project.Constraints;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Enums;
@@ -24,16 +19,18 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Handl
 
         public async Task<Unit> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
-            if (request.UpdateDto is not {Id: > 0})
+            var updateProjectValidator = new UpdateProjectDtoValidator();
+            var validationResult = await updateProjectValidator.ValidateAsync(request.UpdateDto, cancellationToken);
+
+            if (!validationResult.IsValid)
             {
-                throw new ArgumentException(nameof(request));
+                 throw new Exceptions.ValidationException(validationResult);
             }
 
             var projectToUpdate = await _projectRepository.GetById(request.UpdateDto.Id);
             if (projectToUpdate.Status == Status.Deleted)
             {
-                // throw Business Logic Exception : company no longer exists
-                throw new ApplicationException("Project is not found");
+                throw new NotFoundException(nameof(Project), request.UpdateDto.Id);
             }
 
             _mapper.Map(request.UpdateDto, projectToUpdate);

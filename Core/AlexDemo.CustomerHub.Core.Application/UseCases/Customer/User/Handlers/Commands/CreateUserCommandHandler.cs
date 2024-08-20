@@ -1,4 +1,5 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User.Constraints;
+﻿using AlexDemo.CustomerHub.Core.Application.Exceptions;
+using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User.Constraints;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
 using AlexDemo.CustomerHub.Core.Application.ServiceProviders;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Actions.Commands;
@@ -25,7 +26,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Handlers.
 
             if (!validationResult.IsValid)
             {
-                throw new ArgumentException("Command details are not valid");
+                throw new ValidationException(validationResult);
             }
 
             // todo: additional validations

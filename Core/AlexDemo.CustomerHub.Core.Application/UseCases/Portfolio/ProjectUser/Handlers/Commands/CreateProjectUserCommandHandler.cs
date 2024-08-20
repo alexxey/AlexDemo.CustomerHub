@@ -1,4 +1,5 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.ProjectUser.Constraints;
+﻿using AlexDemo.CustomerHub.Core.Application.Exceptions;
+using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.ProjectUser.Constraints;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
 using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.ProjectUser.Actions.Commands;
@@ -28,7 +29,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.ProjectUser.H
 
             if (!validationResult.IsValid)
             {
-                throw new ArgumentException("Command details are not valid");
+                throw new ValidationException(validationResult);
             }
 
             var projectUser = _mapper.Map<Entities.Portfolio.ProjectUser>(request.CreateDto);
