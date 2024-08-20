@@ -22,7 +22,5 @@ namespace AlexDemo.CustomerHub.Core.Entities.Portfolio
         public ProjectUserRole CurrentRole { get; set; }
 
         public string? PositionDescription { get; set; }
-
-        public Status Status { get; set; }
     }
 }

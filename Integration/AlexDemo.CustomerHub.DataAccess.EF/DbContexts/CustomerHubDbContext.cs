@@ -1,4 +1,5 @@
 ﻿using AlexDemo.CustomerHub.Core.Constraints;
+using AlexDemo.CustomerHub.Core.Entities;
 using AlexDemo.CustomerHub.Core.Entities.Customer;
 using AlexDemo.CustomerHub.Core.Entities.Portfolio;
 using AlexDemo.CustomerHub.DataAccess.EF.Extensions;
@@ -10,7 +11,7 @@ using Microsoft.Extensions.Options;
 namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
 {
     public class CustomerHubDbContext(
-        DbContextOptions options,
+        DbContextOptions<CustomerHubDbContext> options,
         IOptions<DatabaseSettings> dbSettings)
         : DbContext(options)
     {
@@ -32,6 +33,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerHubDbContext).Assembly);
+
             modelBuilder.HasDefaultSchema(DbConstants.Domain.DefaultSchemaName);
 
             // common configurations
@@ -42,6 +45,22 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
             DefineProfileConfiguration(modelBuilder);
 
             ConfigureRelationships(modelBuilder);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            // setup common Log properties
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            {
+                entry.Entity.UpdatedOn = DateTime.UtcNow;
+
+                if (entry.State == EntityState.Added)
+                {
+                    // todo alex: add here additional logic if/when needed
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         #region Customer Configuration
