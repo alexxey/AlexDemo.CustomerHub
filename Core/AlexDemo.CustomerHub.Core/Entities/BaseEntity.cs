@@ -1,4 +1,6 @@
-﻿namespace AlexDemo.CustomerHub.Core.Entities
+﻿using AlexDemo.CustomerHub.Core.Enums;
+
+namespace AlexDemo.CustomerHub.Core.Entities
 {
     public abstract class BaseEntity
     {
@@ -6,5 +8,7 @@
         /// field designed for logs/statistic purposes
         /// </summary>
         public DateTime UpdatedOn { get; set; }
+
+        public Status Status { get; set; }
     }
 }

@@ -21,8 +21,6 @@ namespace AlexDemo.CustomerHub.Core.Entities.Portfolio
 
         public ProjectStatus ProjectStatus { get; set; }
 
-        public Status Status { get; set; }
-
         public int ResponsibleOfficeId { get; set; }
 
         public CompanyOffice? ResponsibleOffice { get; set; }

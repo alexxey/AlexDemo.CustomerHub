@@ -9,14 +9,7 @@ namespace AlexDemo.CustomerHub.Core.Application.Persistence.Contracts
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<T> GetById(TId id);
-
-        /// <summary>
-        /// method to include navigational properties associated with target entity
-        /// </summary>
-        /// <param name="id">entityId</param>
-        /// <returns></returns>
-        Task<T> GetByIdWithDetails(TId id);
+        Task<T?> GetById(TId id);
 
         /// <summary>
         /// method to ensure that Entity with provided Id and not deleted status (or other validation rules) ie available in the system
@@ -29,8 +22,10 @@ namespace AlexDemo.CustomerHub.Core.Application.Persistence.Contracts
 
         Task<T> Create(T entity);
 
-        Task<T> Update(T entity);
+        Task Update(T entity);
 
         Task Delete(T entity);
+
+        Task DeleteById(TId entity);
     }
 }

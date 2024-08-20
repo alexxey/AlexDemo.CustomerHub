@@ -27,7 +27,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
 
             if (!validationResult.IsValid)
             {
-                // an alternative approach not to throw expcetions but to work with response types
+                // an alternative approach not to throw exceptions but to work with response types
                 response.IsSuccessful = false;
                 response.Message = "Create Company Failed";
                 response.Data = new List<ResponseMessageModel>();

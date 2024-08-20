@@ -18,8 +18,6 @@ namespace AlexDemo.CustomerHub.Core.Entities.Customer
 
         public string? WebSite { get; set; }
 
-        public Status Status { get; set; }
-
         public decimal Revenue { get; set; }
 
         public Currency Currency { get; set; }
