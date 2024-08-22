@@ -1,7 +1,8 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
 using AlexDemo.CustomerHub.Core.Entities.Customer;
 using AlexDemo.CustomerHub.Core.Enums;
 using AlexDemo.CustomerHub.DataAccess.EF.DbContexts;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace AlexDemo.CustomerHub.DataAccess.EF.Repositories.Customer

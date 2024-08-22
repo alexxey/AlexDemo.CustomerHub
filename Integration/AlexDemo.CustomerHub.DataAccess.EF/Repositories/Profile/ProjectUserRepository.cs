@@ -1,7 +1,8 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Portfolio;
 using AlexDemo.CustomerHub.Core.Entities.Portfolio;
 using AlexDemo.CustomerHub.Core.Enums;
 using AlexDemo.CustomerHub.DataAccess.EF.DbContexts;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace AlexDemo.CustomerHub.DataAccess.EF.Repositories.Profile

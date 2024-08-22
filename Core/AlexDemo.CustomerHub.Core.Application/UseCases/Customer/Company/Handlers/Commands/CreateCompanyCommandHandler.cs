@@ -1,6 +1,6 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Enums;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
+using AlexDemo.CustomerHub.Core.Application.Enums;
 using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company.Constraints;
-using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
 using AlexDemo.CustomerHub.Core.Application.Responses;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Responses;

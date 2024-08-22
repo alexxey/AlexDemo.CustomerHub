@@ -1,6 +1,6 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Exceptions;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
+using AlexDemo.CustomerHub.Core.Application.Exceptions;
 using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.CompanyOffice.Constraints;
-using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Actions.Commands;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Handlers.Commands

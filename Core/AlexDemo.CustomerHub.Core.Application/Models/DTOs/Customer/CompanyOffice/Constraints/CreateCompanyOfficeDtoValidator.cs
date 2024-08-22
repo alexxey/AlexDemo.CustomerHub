@@ -1,4 +1,4 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
 using AlexDemo.CustomerHub.Core.Constraints;
 
 using FluentValidation;

@@ -1,7 +1,7 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Exceptions;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
+using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Portfolio;
+using AlexDemo.CustomerHub.Core.Application.Exceptions;
 using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.ProjectUser.Constraints;
-using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
-using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.ProjectUser.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Enums;
 

@@ -1,5 +1,6 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Customer;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
 using AlexDemo.CustomerHub.Core.Constraints;
+
 using FluentValidation;
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User.Constraints

@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{11BBB9FB-5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Core.Application.UnitTests", "Tests\Unit\AlexDemo.CustomerHub.Core.Application.UnitTests\AlexDemo.CustomerHub.Core.Application.UnitTests.csproj", "{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Infrastructure", "Integration\AlexDemo.CustomerHub.Infrastructure\AlexDemo.CustomerHub.Infrastructure.csproj", "{5DEE90FD-CD8C-4B58-A9CA-445843BC1250}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DEE90FD-CD8C-4B58-A9CA-445843BC1250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DEE90FD-CD8C-4B58-A9CA-445843BC1250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DEE90FD-CD8C-4B58-A9CA-445843BC1250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DEE90FD-CD8C-4B58-A9CA-445843BC1250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{3C359BCA-494B-4E5E-8560-17C1F49134DE} = {4AF7F813-F3B2-4BB7-B5C7-09D02746BA0B}
 		{11BBB9FB-5FD2-412D-926F-075297CE0C23} = {0905E03B-8F1D-4CB1-9C80-6D4E5615F521}
 		{FFC7E7D6-630F-4E33-A4B5-6FFA931F7EC1} = {11BBB9FB-5FD2-412D-926F-075297CE0C23}
+		{5DEE90FD-CD8C-4B58-A9CA-445843BC1250} = {4AF7F813-F3B2-4BB7-B5C7-09D02746BA0B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FCDB9F1-357C-444C-8FBA-9ECCAE35A3C4}

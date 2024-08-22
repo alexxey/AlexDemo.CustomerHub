@@ -1,6 +1,6 @@
 ﻿using AlexDemo.CustomerHub.Core.Entities;
 
-namespace AlexDemo.CustomerHub.Core.Application.Persistence.Contracts
+namespace AlexDemo.CustomerHub.Core.Application.Contracts.Persistence
 {
     public interface IGenericRepository<T, TId> where T : BaseEntity
     {

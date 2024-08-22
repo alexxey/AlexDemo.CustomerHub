@@ -1,6 +1,7 @@
-﻿using AlexDemo.CustomerHub.Core.Entities.Portfolio;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence;
+using AlexDemo.CustomerHub.Core.Entities.Portfolio;
 
-namespace AlexDemo.CustomerHub.Core.Application.Persistence.Contracts.Portfolio
+namespace AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Portfolio
 {
     public interface IProjectUserRepository : IGenericRepository<ProjectUser, long>
     {
