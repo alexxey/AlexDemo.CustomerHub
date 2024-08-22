@@ -15,7 +15,7 @@ public class CustomerHubDbContextFactory : IDesignTimeDbContextFactory<CustomerH
             .Build();
 
         var builder = new DbContextOptionsBuilder<CustomerHubDbContext>();
-        var connectionString = configuration.GetConnectionString("CustomerHubConnectionString");
+        var connectionString = configuration.GetConnectionString("CustomerHubConnection");
         builder.UseSqlServer(connectionString);
 
         return new CustomerHubDbContext(builder.Options);

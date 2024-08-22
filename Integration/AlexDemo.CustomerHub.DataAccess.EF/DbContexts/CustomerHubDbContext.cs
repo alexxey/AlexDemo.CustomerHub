@@ -2,11 +2,10 @@
 using AlexDemo.CustomerHub.Core.Entities;
 using AlexDemo.CustomerHub.Core.Entities.Customer;
 using AlexDemo.CustomerHub.Core.Entities.Portfolio;
+using AlexDemo.CustomerHub.DataAccess.EF.Configurations;
 using AlexDemo.CustomerHub.DataAccess.EF.Extensions;
-using AlexDemo.CustomerHub.DataAccess.EF.Settings;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
 {
@@ -204,6 +203,10 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
             modelBuilder.Entity<Project>().ToTable(DbConstants.Domain.EntityNames.ProjectEntityName)
                 .HasKey(c => c.Id);
 
+            modelBuilder.Entity<Project>()
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<Project>().Property(c => c.ProjectCode)
                 .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength)
                 .IsRequired();
@@ -228,9 +231,14 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
 
         private void DefineProjectUserConfiguration(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProjectUser>().ToTable(DbConstants.Domain.EntityNames.ProjectUserEntityName);
+            modelBuilder.Entity<ProjectUser>().ToTable(DbConstants.Domain.EntityNames.ProjectUserEntityName)
+                .HasKey(c => c.Id);
 
-            modelBuilder.Entity<ProjectUser>().HasKey(pu => new { pu.ProjectId, pu.UserId });
+            // in case we need composite key : modelBuilder.Entity<ProjectUser>().HasKey(pu => new { pu.ProjectId, pu.UserId });
+
+            modelBuilder.Entity<ProjectUser>()
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<ProjectUser>().Property(c => c.StartDate)
                 .HasColumnType(DbConstants.CommonSettings.DateTimeSecOnlyAccuracyFormat)
@@ -260,7 +268,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
             modelBuilder.Entity<Company>()
                 .HasMany(c => c.Projects)
                 .WithOne(o => o.Company)
-                .HasForeignKey(o => o.CompanyId);
+                .HasForeignKey(o => o.CompanyId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<CompanyOffice>()
                 .HasMany(c => c.Users)
@@ -275,7 +284,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
             modelBuilder.Entity<User>()
                 .HasMany(c => c.Projects)
                 .WithOne(o => o.ProjectOwner)
-                .HasForeignKey(o => o.ProjectOwnerId);
+                .HasForeignKey(o => o.ProjectOwnerId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ProjectUser>().HasOne(pu => pu.Project)
                 .WithMany(p => p.ProjectUsers)

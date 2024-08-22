@@ -16,7 +16,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF
         {
             services.AddDbContext<CustomerHubDbContext>(options =>
                 options.UseSqlServer(
-                    configuration.GetConnectionString("CustomerHubConnectionString")));
+                    configuration.GetConnectionString("CustomerHubConnection")));
 
             RegisterRepositories(services);
 

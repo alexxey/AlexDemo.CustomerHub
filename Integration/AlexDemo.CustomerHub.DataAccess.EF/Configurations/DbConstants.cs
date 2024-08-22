@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace AlexDemo.CustomerHub.DataAccess.EF
+namespace AlexDemo.CustomerHub.DataAccess.EF.Configurations
 {
     /// <summary>
     /// class to store EF specific rules and limitations

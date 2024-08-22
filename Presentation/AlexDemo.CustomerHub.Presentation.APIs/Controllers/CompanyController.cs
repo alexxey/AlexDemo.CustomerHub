@@ -44,7 +44,7 @@ namespace AlexDemo.CustomerHub.Presentation.APIs.Controllers
 
         // POST api/<CompanyController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateCompanyDto createDto)
+        public async Task<ActionResult<int>> Post([FromBody] CreateCompanyDto createDto)
         {
             var command = new CreateCompanyCommand {CreateDto = createDto};
             var response = await _mediator.Send(command);

@@ -1,4 +1,6 @@
 ﻿using AlexDemo.CustomerHub.Core.Entities;
+using AlexDemo.CustomerHub.DataAccess.EF.Configurations;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace AlexDemo.CustomerHub.DataAccess.EF.Extensions
