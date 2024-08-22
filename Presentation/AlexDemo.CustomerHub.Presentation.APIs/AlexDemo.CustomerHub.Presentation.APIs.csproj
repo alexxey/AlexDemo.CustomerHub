@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.1" />
   </ItemGroup>
@@ -17,6 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\AlexDemo.CustomerHub.Core.Application\AlexDemo.CustomerHub.Core.Application.csproj" />
     <ProjectReference Include="..\..\Core\AlexDemo.CustomerHub.Core\AlexDemo.CustomerHub.Core.csproj" />
+    <ProjectReference Include="..\..\Integration\AlexDemo.CustomerHub.DataAccess.EF\AlexDemo.CustomerHub.DataAccess.EF.csproj" />
+    <ProjectReference Include="..\..\Integration\AlexDemo.CustomerHub.Infrastructure\AlexDemo.CustomerHub.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

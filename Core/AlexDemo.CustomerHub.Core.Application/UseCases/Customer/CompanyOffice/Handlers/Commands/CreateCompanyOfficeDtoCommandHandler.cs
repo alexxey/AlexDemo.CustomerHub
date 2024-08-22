@@ -5,7 +5,7 @@ using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Acti
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Handlers.Commands
 {
-    public class CreateCompanyOfficeDtoCommandHandler : IRequestHandler<CreateCompanyOfficeDtoCommand, int>
+    public class CreateCompanyOfficeDtoCommandHandler : IRequestHandler<CreateCompanyOfficeCommand, int>
     {
         private readonly ICompanyOfficeRepository _companyOfficeRepository;
         private readonly ICompanyRepository _companyRepository;
@@ -18,7 +18,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateCompanyOfficeDtoCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateCompanyOfficeCommand request, CancellationToken cancellationToken)
         {
             var companyOfficeValidator = new CreateCompanyOfficeDtoValidator(_companyRepository);
             var validationResult = await companyOfficeValidator.ValidateAsync(request.CreateDto, cancellationToken);

@@ -8,9 +8,10 @@ namespace AlexDemo.CustomerHub.Infrastructure
 {
     public static class InfrastructureServicesRegistration 
     {
-        public static IServiceCollection ConfigureDataAccessServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+            IConfigurationSection emailSettings = configuration.GetSection("EmailSettings");
+            services.Configure<EmailSettings>(emailSettings);
             services.AddTransient<IEmailService, EmailService>();
 
             return services;

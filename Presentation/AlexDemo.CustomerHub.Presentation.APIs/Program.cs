@@ -1,4 +1,8 @@
 
+using AlexDemo.CustomerHub.Core.Application;
+using AlexDemo.CustomerHub.DataAccess.EF;
+using AlexDemo.CustomerHub.Infrastructure;
+
 namespace AlexDemo.CustomerHub.Presentation.APIs
 {
     public class Program
@@ -8,6 +12,9 @@ namespace AlexDemo.CustomerHub.Presentation.APIs
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.ConfigureApplicationServices();
+            builder.Services.ConfigureInfrastructureServices(builder.Configuration);
+            builder.Services.ConfigureDataAccessServices(builder.Configuration);
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

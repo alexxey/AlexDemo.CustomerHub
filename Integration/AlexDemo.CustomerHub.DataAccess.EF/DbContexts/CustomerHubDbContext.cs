@@ -11,12 +11,9 @@ using Microsoft.Extensions.Options;
 namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
 {
     public class CustomerHubDbContext(
-        DbContextOptions<CustomerHubDbContext> options,
-        IOptions<DatabaseSettings> dbSettings)
+        DbContextOptions<CustomerHubDbContext> options)
         : DbContext(options)
     {
-        protected readonly DatabaseSettings DbSettings = dbSettings.Value;
-
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyOffice> CompanyOffices { get; set; }
         public DbSet<User> Users { get; set; }
@@ -27,7 +24,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DbSettings.CustomerHubConnection);
+                throw new ApplicationException("optionsBuilder is not configured");
             }
         }
 
