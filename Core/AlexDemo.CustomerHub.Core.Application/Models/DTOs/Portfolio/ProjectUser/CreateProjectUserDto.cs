@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.ProjectUser
 {
-    public record CreateProjectUserDto
+    public class CreateProjectUserDto
     {
         public int ProjectId { get; set; }
 

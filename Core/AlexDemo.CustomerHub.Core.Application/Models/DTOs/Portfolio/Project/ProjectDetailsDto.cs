@@ -4,7 +4,7 @@ using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project
 {
-    public record ProjectDetailsDto : BaseDto<int>
+    public class ProjectDetailsDto : BaseDto<int>
     {
         public required string ProjectCode { get; set; }
 

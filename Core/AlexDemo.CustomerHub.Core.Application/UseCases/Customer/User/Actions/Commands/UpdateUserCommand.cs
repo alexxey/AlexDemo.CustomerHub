@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Actions.Commands
 {
-    internal class UpdateUserCommand
+    public class UpdateUserCommand : IRequest<Unit>
     {
+        public UpdateUserDto UpdateDto { get; set; }
     }
 }

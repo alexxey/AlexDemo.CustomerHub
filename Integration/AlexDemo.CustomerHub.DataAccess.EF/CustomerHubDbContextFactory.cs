@@ -16,8 +16,10 @@ public class CustomerHubDbContextFactory : IDesignTimeDbContextFactory<CustomerH
 
         var builder = new DbContextOptionsBuilder<CustomerHubDbContext>();
         var connectionString = configuration.GetConnectionString("CustomerHubConnection");
-        builder.UseSqlServer(connectionString);
-
+        
+        // activate retry policy
+        builder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure());
+        
         return new CustomerHubDbContext(builder.Options);
     }
 }

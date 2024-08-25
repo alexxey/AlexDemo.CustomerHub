@@ -3,7 +3,7 @@ using AlexDemo.CustomerHub.Core.Enums.Customer;
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company
 {
-    public record CompanyDetailsDto : BaseDto<int>
+    public class CompanyDetailsDto : BaseDto<int>
     {
         public required string BrandName { get; set; }
 

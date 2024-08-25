@@ -5,13 +5,13 @@ using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Acti
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.Handlers.Commands
 {
-    public class CreateCompanyOfficeDtoCommandHandler : IRequestHandler<CreateCompanyOfficeCommand, int>
+    public class CreateCompanyOfficeCommandHandler : IRequestHandler<CreateCompanyOfficeCommand, int>
     {
         private readonly ICompanyOfficeRepository _companyOfficeRepository;
         private readonly ICompanyRepository _companyRepository;
         private readonly IMapper _mapper;
 
-        public CreateCompanyOfficeDtoCommandHandler(ICompanyOfficeRepository companyOfficeRepository, ICompanyRepository companyRepository, IMapper mapper)
+        public CreateCompanyOfficeCommandHandler(ICompanyOfficeRepository companyOfficeRepository, ICompanyRepository companyRepository, IMapper mapper)
         {
             _companyOfficeRepository = companyOfficeRepository;
             _companyRepository = companyRepository;

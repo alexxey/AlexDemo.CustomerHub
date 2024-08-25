@@ -1,6 +1,6 @@
 ﻿namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.Project
 {
-    public record CreateProjectDto
+    public class CreateProjectDto
     {
         public required string ProjectCode { get; set; }
 

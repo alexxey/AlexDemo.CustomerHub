@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User
 {
-    public record CreateUserDto
+    public class CreateUserDto
     {
         public string? FirstName { get; set; }
 

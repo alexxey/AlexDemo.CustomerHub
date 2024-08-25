@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User
 {
-    public record UserListItemDto : BaseDto<int>
+    public class UserListItemDto : BaseDto<int>
     {
         public string? FullName { get; set; }
 

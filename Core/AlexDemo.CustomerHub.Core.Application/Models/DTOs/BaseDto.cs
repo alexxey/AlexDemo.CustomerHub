@@ -1,6 +1,6 @@
 ﻿namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs
 {
-    public record BaseDto<T>
+    public class BaseDto<T>
     {
         public required T Id { get; set; }
     }

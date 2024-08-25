@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company
 {
-    public record CreateCompanyDto
+    public class CreateCompanyDto
     {
         public required string BrandName { get; set; }
 

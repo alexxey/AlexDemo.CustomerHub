@@ -1,10 +1,10 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
-using AlexDemo.CustomerHub.Core.Application.UseCases.Common.Actions.Commands;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handlers.Commands
 {
-    public class DeleteCompanyCommandHandler : IRequestHandler<DeleteEntityCommand<int>, Unit>
+    public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand, Unit>
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly IMapper _mapper;
@@ -15,7 +15,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(DeleteEntityCommand<int> request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
         {
             if (request.Id <= 0)
             {

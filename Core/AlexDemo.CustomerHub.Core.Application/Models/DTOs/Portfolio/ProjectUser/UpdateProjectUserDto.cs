@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.ProjectUser
 {
-    public record UpdateProjectUserDto : BaseDto<long>, IBaseStatusDto
+    public class UpdateProjectUserDto : BaseDto<long>, IBaseStatusDto
     {
         public DateTime EndDate { get; set; }
 

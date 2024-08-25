@@ -21,10 +21,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                throw new ApplicationException("optionsBuilder is not configured");
-            }
+            optionsBuilder.EnableDetailedErrors();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

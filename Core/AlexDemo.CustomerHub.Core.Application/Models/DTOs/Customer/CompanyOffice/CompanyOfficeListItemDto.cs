@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.CompanyOffice
 {
-    public record CompanyOfficeListItemDto : BaseDto<int>
+    public class CompanyOfficeListItemDto : BaseDto<int>
     {
         public required string Name { get; set; }
 

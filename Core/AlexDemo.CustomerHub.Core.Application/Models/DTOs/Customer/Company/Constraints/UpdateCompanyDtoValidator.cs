@@ -1,6 +1,5 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Common.Constraints;
 using AlexDemo.CustomerHub.Core.Constraints;
-using AlexDemo.CustomerHub.Core.Enums;
 using FluentValidation;
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company.Constraints
@@ -22,10 +21,6 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company.Con
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull()
                 .MaximumLength(EntityConstraints.CommonSettings.MediumStringLength);
-
-            RuleFor(r => r.Status)
-                .NotEqual(Status.Deleted)
-                .WithMessage("Deleted state is not supported in update flow");
         }
     }
 }

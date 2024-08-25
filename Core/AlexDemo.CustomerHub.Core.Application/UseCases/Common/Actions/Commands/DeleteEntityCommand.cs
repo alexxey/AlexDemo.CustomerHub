@@ -1,6 +1,6 @@
 ﻿namespace AlexDemo.CustomerHub.Core.Application.UseCases.Common.Actions.Commands
 {
-    public record DeleteEntityCommand<T> : IRequest<Unit>
+    public class DeleteEntityCommand<T> : IRequest<Unit>
     {
         public T Id { get; set; }
 

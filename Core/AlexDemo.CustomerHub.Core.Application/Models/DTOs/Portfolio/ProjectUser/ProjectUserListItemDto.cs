@@ -4,7 +4,7 @@ using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Portfolio.ProjectUser
 {
-    public record ProjectUserListItemDto : BaseDto<long>
+    public class ProjectUserListItemDto : BaseDto<long>
     {
         public int ProjectId { get; set; }
 

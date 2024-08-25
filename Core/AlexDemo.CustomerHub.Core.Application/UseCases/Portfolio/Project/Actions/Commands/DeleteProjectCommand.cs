@@ -2,7 +2,7 @@
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Portfolio.Project.Actions.Commands
 {
-    public record DeleteProjectCommand : DeleteEntityCommand<int>
+    public class DeleteProjectCommand : DeleteEntityCommand<int>
     {
     }
 }
