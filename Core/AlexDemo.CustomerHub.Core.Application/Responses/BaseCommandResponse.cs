@@ -8,9 +8,4 @@
 
         public List<ResponseMessageModel> Data {get; set;}
     }
-
-    public class BaseCreateCommandResponse<T> : BaseCommandResponse
-    {
-        public T Id { get; set; }
-    }
 }

@@ -17,7 +17,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
 
         public async Task<List<CompanyListItemDto>> Handle(GetCompaniesListRequest request, CancellationToken cancellationToken)
         {
-            var companies = await _companyRepository.GetAll();
+            IReadOnlyList<Entities.Customer.Company> companies = await _companyRepository.GetAll();
             return _mapper.Map<List<CompanyListItemDto>>(companies);
         }
     }

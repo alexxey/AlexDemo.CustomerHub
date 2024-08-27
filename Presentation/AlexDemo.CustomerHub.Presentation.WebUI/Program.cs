@@ -1,4 +1,10 @@
+using System.Reflection;
+using AlexDemo.CustomerHub.Presentation.WebUI.Contracts;
+using AlexDemo.CustomerHub.Presentation.WebUI.Contracts.Customer;
 using AlexDemo.CustomerHub.Presentation.WebUI.Data;
+using AlexDemo.CustomerHub.Presentation.WebUI.Services;
+using AlexDemo.CustomerHub.Presentation.WebUI.Services.Base;
+using AlexDemo.CustomerHub.Presentation.WebUI.Services.Customer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +25,8 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            ConfigureServices(builder.Services);
 
             var app = builder.Build();
 
@@ -47,6 +55,17 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI
             app.MapRazorPages();
 
             app.Run();
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri("https://localhost:44309"));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<ICompanyService, CompanyService>();
+
+            // for local storage we expect to have only single instance of the local storage
+            services.AddSingleton<ILocalStorageService, LocalStorageService>();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace AlexDemo.CustomerHub.Presentation.APIs
             builder.Services.AddCors(o =>
             {
                 o.AddPolicy("CorsPolicy",
-                    builder => builder
+                    configPolicy => configPolicy
                         .AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod());

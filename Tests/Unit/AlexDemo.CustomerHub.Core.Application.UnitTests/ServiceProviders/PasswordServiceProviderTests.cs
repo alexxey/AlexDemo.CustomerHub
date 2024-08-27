@@ -2,7 +2,7 @@
 using AlexDemo.CustomerHub.Core.Entities.Customer;
 using AlexDemo.CustomerHub.Core.Enums;
 
-namespace AlexDemo.CustomerHub.Core.Application.UnitTests.Common.ServiceProviders
+namespace AlexDemo.CustomerHub.Core.Application.UnitTests.ServiceProviders
 {
     public class PasswordServiceProviderTests
     {

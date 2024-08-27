@@ -1,9 +1,9 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company;
+using AlexDemo.CustomerHub.Core.Application.Responses;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Queries;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Responses;
 using MediatR;
-
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -44,33 +44,39 @@ namespace AlexDemo.CustomerHub.Presentation.APIs.Controllers
 
         // POST api/<CompanyController>
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] CreateCompanyDto createDto)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<CreateCompanyCommandResponse>> Post([FromBody] CreateCompanyDto createDto)
         {
             var command = new CreateCompanyCommand {CreateDto = createDto};
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
+        // todo alex: here I need to consider several approaches : should I use command of concrete type or generic one
+        // concrete type should be useful in queues or other pipelines that can capture type specific commands, 
+        // but the response can be generic entity as long as it contains all necessary information
+
         // PUT api/<CompanyController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateCompanyDto updateDto)
+        public async Task<ActionResult<UpdateCompanyCommandResponse>> Put(int id, [FromBody] UpdateCompanyDto updateDto)
         {
             var command = new UpdateCompanyCommand { UpdateDto = updateDto };
-            await _mediator.Send(command);
-            return NoContent();
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         // DELETE api/<CompanyController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<BaseModifyCommandResponse<int>>> Delete(int id)
         {
             var command = new DeleteCompanyCommand
             {
                 Id = id,
                 Actor = "test.user"
             };
-            await _mediator.Send(command);
-            return NoContent();
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
     }
 }

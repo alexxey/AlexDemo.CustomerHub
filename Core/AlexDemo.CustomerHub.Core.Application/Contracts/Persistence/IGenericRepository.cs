@@ -12,7 +12,7 @@ namespace AlexDemo.CustomerHub.Core.Application.Contracts.Persistence
         Task<T?> GetById(TId id);
 
         /// <summary>
-        /// method to ensure that Entity with provided Id and not deleted status (or other validation rules) ie available in the system
+        /// method to ensure that Entity with provided Id has not deleted status (or other validation rules) ie available in the system
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
