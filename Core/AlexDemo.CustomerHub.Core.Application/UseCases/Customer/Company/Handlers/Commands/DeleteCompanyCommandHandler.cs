@@ -2,11 +2,12 @@
 using AlexDemo.CustomerHub.Core.Application.Enums;
 using AlexDemo.CustomerHub.Core.Application.Responses;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Commands;
+using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Responses;
 using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handlers.Commands
 {
-    public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand, BaseCommandResponse>
+    public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand, DeleteCompanyCommandResponse>
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly IMapper _mapper;
@@ -17,7 +18,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
             _mapper = mapper;
         }
 
-        public async Task<BaseCommandResponse> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteCompanyCommandResponse> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
         {
             if (request.Id <= 0)
             {
@@ -29,7 +30,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
                 throw new ArgumentException(nameof(request.Actor));
             }
 
-            var response = new BaseModifyCommandResponse<int>
+            var response = new DeleteCompanyCommandResponse
             {
                 Id = request.Id
             };
@@ -54,7 +55,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
                 return response;
             }
 
-            await _companyRepository.Delete(company);
+            await _companyRepository.DeleteById(company.Id);
 
             response.IsSuccessful = true;
             response.Message = "Company deleted";

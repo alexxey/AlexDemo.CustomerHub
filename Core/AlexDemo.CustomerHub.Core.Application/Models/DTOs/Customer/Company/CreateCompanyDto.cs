@@ -9,5 +9,7 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company
         public Country HeadOfficeCountry { get; set; }
 
         public int NumberOfEmployees { get; set; }
+
+        public decimal AnnualRevenue { get; set; }
     }
 }

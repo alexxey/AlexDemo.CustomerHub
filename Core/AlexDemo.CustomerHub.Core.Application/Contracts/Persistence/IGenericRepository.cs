@@ -24,7 +24,13 @@ namespace AlexDemo.CustomerHub.Core.Application.Contracts.Persistence
 
         Task Update(T entity);
 
-        Task Delete(T entity);
+        /// <summary>
+        /// this is a physical delete operation : only use it if you understand the logic behind
+        /// for logical delete please use DeleteById method
+        /// </summary>
+        /// <param name="entity">entity to physically remove from data layer</param>
+        /// <returns></returns>
+        Task HardDelete(T entity);
 
         Task DeleteById(TId entity);
     }

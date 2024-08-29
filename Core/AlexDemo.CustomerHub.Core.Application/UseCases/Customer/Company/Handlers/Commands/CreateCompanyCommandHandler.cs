@@ -2,6 +2,7 @@
 using AlexDemo.CustomerHub.Core.Application.Enums;
 using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company.Constraints;
 using AlexDemo.CustomerHub.Core.Application.Responses;
+using AlexDemo.CustomerHub.Core.Application.ServiceProviders;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Commands;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Responses;
 
@@ -38,9 +39,13 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
                         ResponseType = ResponseType.ValidationError, Message = validationResultError.ErrorMessage
                     });
                 }
+
+                return response;
             }
             
             var company = _mapper.Map<Entities.Customer.Company>(request.CreateDto);
+            company.BusinessType = CompanyMetadataServiceProvider.DefineBusinessTypeModel(company);
+            company.Currency = CompanyMetadataServiceProvider.DefineCurrency(company.HeadOfficeCountry);
 
             company = await _companyRepository.Create(company);
 

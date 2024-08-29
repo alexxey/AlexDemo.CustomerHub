@@ -17,7 +17,7 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Models.ViewModels.Customer.Com
 
         public Status Status { get; set; }
 
-        public decimal Revenue { get; set; }
+        public decimal AnnualRevenue { get; set; }
 
         public Currency Currency { get; set; }
 

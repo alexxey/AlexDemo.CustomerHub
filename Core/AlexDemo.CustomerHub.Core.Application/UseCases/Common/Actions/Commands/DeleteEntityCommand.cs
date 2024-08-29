@@ -1,11 +1,11 @@
 ﻿namespace AlexDemo.CustomerHub.Core.Application.UseCases.Common.Actions.Commands
 {
-    public class DeleteEntityCommand<T> : IRequest<Unit>
+    public class DeleteEntityCommand<TKey, TResponse> : IRequest<TResponse>
     {
-        public T Id { get; set; }
+        public TKey Id { get; set; }
 
         /// <summary>
-        /// Id of the person who performed this change
+        /// Id of the person/entity who performed this change
         /// </summary>
         public string Actor { get; set; }
     }

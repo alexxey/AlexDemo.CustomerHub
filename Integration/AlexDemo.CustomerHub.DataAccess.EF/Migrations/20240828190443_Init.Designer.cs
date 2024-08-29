@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
 {
     [DbContext(typeof(CustomerHubDbContext))]
-    [Migration("20240822212248_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20240828190443_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,10 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("AnnualRevenue")
+                        .HasPrecision(15, 2)
+                        .HasColumnType("decimal(15,2)");
+
                     b.Property<string>("BrandName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -43,7 +47,6 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("CeoName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -51,7 +54,6 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -60,10 +62,6 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
 
                     b.Property<int>("NumberOfEmployees")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("Revenue")
-                        .HasPrecision(15, 2)
-                        .HasColumnType("decimal(15,2)");
 
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
@@ -83,7 +81,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique()
-                        .HasDatabaseName("IX_UX_Company_Email");
+                        .HasDatabaseName("IX_UX_Company_Email")
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.HasIndex("Status")
                         .HasDatabaseName("IX_Company_Status");
@@ -94,6 +93,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                         new
                         {
                             Id = 1,
+                            AnnualRevenue = 3700000m,
                             BrandName = "Bentley",
                             BusinessType = (byte)3,
                             CeoName = "Adrian Hallmark",
@@ -101,14 +101,14 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "bentley@demo.com",
                             HeadOfficeCountry = (byte)1,
                             NumberOfEmployees = 5000,
-                            Revenue = 3700000m,
                             Status = (byte)2,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 21, 47, 919, DateTimeKind.Utc).AddTicks(817),
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 3, 43, 420, DateTimeKind.Utc).AddTicks(1334),
                             WebSite = "www.bentleymotors.com"
                         },
                         new
                         {
                             Id = 2,
+                            AnnualRevenue = 1400000000m,
                             BrandName = "Aston Martin",
                             BusinessType = (byte)3,
                             CeoName = "Amedeo Felisa",
@@ -116,14 +116,14 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "aston-martin@demo.com",
                             HeadOfficeCountry = (byte)1,
                             NumberOfEmployees = 2500,
-                            Revenue = 1400000000m,
                             Status = (byte)2,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(831),
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1348),
                             WebSite = "www.astonmartin.com"
                         },
                         new
                         {
                             Id = 3,
+                            AnnualRevenue = 158000000000m,
                             BrandName = "BMW",
                             BusinessType = (byte)6,
                             CeoName = "Oliver Zipse",
@@ -131,13 +131,13 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "bnw@demo.com",
                             HeadOfficeCountry = (byte)3,
                             NumberOfEmployees = 130000,
-                            Revenue = 158000000000m,
                             Status = (byte)1,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(835)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1353)
                         },
                         new
                         {
                             Id = 4,
+                            AnnualRevenue = 36200000000m,
                             BrandName = "Volvo",
                             BusinessType = (byte)4,
                             CeoName = "Jim Rowan",
@@ -145,13 +145,13 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "volvo@demo.com",
                             HeadOfficeCountry = (byte)2,
                             NumberOfEmployees = 40000,
-                            Revenue = 36200000000m,
                             Status = (byte)2,
-                            UpdatedOn = new DateTime(2024, 8, 16, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(838)
+                            UpdatedOn = new DateTime(2024, 8, 22, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1357)
                         },
                         new
                         {
                             Id = 5,
+                            AnnualRevenue = 240000000000m,
                             BrandName = "Toyota",
                             BusinessType = (byte)6,
                             CeoName = "Akio Toyoda",
@@ -159,13 +159,13 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "toyota@demo.com",
                             HeadOfficeCountry = (byte)6,
                             NumberOfEmployees = 370000,
-                            Revenue = 240000000000m,
                             Status = (byte)3,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(842)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1362)
                         },
                         new
                         {
                             Id = 6,
+                            AnnualRevenue = 61400000000m,
                             BrandName = "Audi",
                             BusinessType = (byte)5,
                             CeoName = "Markus Duesmann",
@@ -173,13 +173,13 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "audi@demo.com",
                             HeadOfficeCountry = (byte)3,
                             NumberOfEmployees = 90000,
-                            Revenue = 61400000000m,
                             Status = (byte)2,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(844)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1364)
                         },
                         new
                         {
                             Id = 7,
+                            AnnualRevenue = 167000000000m,
                             BrandName = "Ford",
                             BusinessType = (byte)6,
                             CeoName = "Jim Farley",
@@ -187,13 +187,13 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "ford@demo.com",
                             HeadOfficeCountry = (byte)5,
                             NumberOfEmployees = 180000,
-                            Revenue = 167000000000m,
                             Status = (byte)2,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(846)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1366)
                         },
                         new
                         {
                             Id = 8,
+                            AnnualRevenue = 23000000000m,
                             BrandName = "Skoda",
                             BusinessType = (byte)4,
                             CeoName = "Klaus Zellmer",
@@ -201,9 +201,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             Email = "skoda@demo.com",
                             HeadOfficeCountry = (byte)4,
                             NumberOfEmployees = 45000,
-                            Revenue = 23000000000m,
                             Status = (byte)1,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(848)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1368)
                         });
                 });
 
@@ -269,7 +268,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             NumberOfEmployees = 4000,
                             OfficeCode = "BNTL-1",
                             Status = (byte)0,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(1979),
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(2421),
                             ZipCode = "CW1 3PL"
                         },
                         new
@@ -282,7 +281,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             NumberOfEmployees = 100,
                             OfficeCode = "ASTN-1",
                             Status = (byte)0,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(1982),
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(2423),
                             ZipCode = "CV35 0DB"
                         });
                 });
@@ -372,12 +371,12 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             FirstName = "Test",
                             LastName = "Sir",
                             Login = "test.bentley",
-                            PasswordHash = "GLHedsmFUt6kqasyxn6KsGsf/mThOme6ElLZm/fw0bU=",
-                            PasswordSalt = "svnVSv8cVzCQQyV2zELixw==",
+                            PasswordHash = "zovGOA3YWAS3zvq2u2ZOk1KIJjxouLbICvRWhaOruKE=",
+                            PasswordSalt = "MYl5TjrpFHEPQfwJ3VpaoQ==",
                             PrimaryOfficeId = 1,
                             Status = (byte)0,
                             Title = "Mr",
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 921, DateTimeKind.Utc).AddTicks(1917)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 426, DateTimeKind.Utc).AddTicks(8312)
                         },
                         new
                         {
@@ -389,12 +388,12 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             FirstName = "Test",
                             LastName = "Madam",
                             Login = "test.aston",
-                            PasswordHash = "kPS45Rsoy687P9g5rorhqwFyI4te+X9VN93JUy3xORs=",
-                            PasswordSalt = "FbPm7DDOeQ6+pCmhzq7Xzg==",
+                            PasswordHash = "ZbXlzKwPR37xs9Wg07PSrIWFF/cQHbYlYubwApCFJjc=",
+                            PasswordSalt = "6k3rIbC7f0Os16HWelRuKg==",
                             PrimaryOfficeId = 2,
                             Status = (byte)0,
                             Title = "Mrs",
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 922, DateTimeKind.Utc).AddTicks(9843)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 428, DateTimeKind.Utc).AddTicks(6577)
                         },
                         new
                         {
@@ -404,11 +403,11 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             DateOfBirth = new DateTime(1999, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user.bentley@aston.com",
                             Login = "user.benntley",
-                            PasswordHash = "xluP2jDFdbsjpbyuDoKMuUQ4yY/QdI0RyyqmHs+A7Bc=",
-                            PasswordSalt = "ifFB0wyDuyULpIwXkGF6rg==",
+                            PasswordHash = "s6JoPoGMlg/Cts3MlJLe1nIPHTOqOrPjrYoIaiqCF+0=",
+                            PasswordSalt = "88ZY+gDfqCTvuA5tRWsTmQ==",
                             PrimaryOfficeId = 1,
                             Status = (byte)0,
-                            UpdatedOn = new DateTime(2024, 8, 22, 21, 22, 47, 924, DateTimeKind.Utc).AddTicks(9136)
+                            UpdatedOn = new DateTime(2024, 8, 28, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(4725)
                         });
                 });
 
@@ -489,7 +488,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             ProjectOwnerId = 1,
                             ProjectStatus = (byte)0,
                             ResponsibleOfficeId = 1,
-                            StartDate = new DateTime(2024, 8, 29, 21, 22, 47, 925, DateTimeKind.Utc).AddTicks(20),
+                            StartDate = new DateTime(2024, 9, 4, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(5867),
                             Status = (byte)1,
                             UpdatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -504,7 +503,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             ProjectOwnerId = 1,
                             ProjectStatus = (byte)0,
                             ResponsibleOfficeId = 1,
-                            StartDate = new DateTime(2024, 8, 23, 21, 22, 47, 925, DateTimeKind.Utc).AddTicks(27),
+                            StartDate = new DateTime(2024, 8, 29, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(5876),
                             Status = (byte)1,
                             UpdatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -563,7 +562,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                             CurrentRole = (byte)1,
                             EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ProjectId = 1,
-                            StartDate = new DateTime(2024, 8, 22, 21, 22, 47, 925, DateTimeKind.Utc).AddTicks(757),
+                            StartDate = new DateTime(2024, 8, 28, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(6630),
                             Status = (byte)2,
                             UpdatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1

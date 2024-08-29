@@ -5,6 +5,6 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Action
 {
     public class UpdateCompanyCommand : IRequest<UpdateCompanyCommandResponse>
     {
-        public UpdateCompanyDto UpdateDto { get; set; }
+        public required UpdateCompanyDto UpdateDto { get; set; }
     }
 }

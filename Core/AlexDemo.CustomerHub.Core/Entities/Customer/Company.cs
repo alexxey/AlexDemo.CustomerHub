@@ -12,13 +12,13 @@ namespace AlexDemo.CustomerHub.Core.Entities.Customer
 
         public Country HeadOfficeCountry { get; set; }
 
-        public required string CeoName { get; set; }
+        public string? CeoName { get; set; }
 
-        public required string Email { get; set; }
+        public string? Email { get; set; }
 
         public string? WebSite { get; set; }
 
-        public decimal Revenue { get; set; }
+        public decimal AnnualRevenue { get; set; }
 
         public Currency Currency { get; set; }
 

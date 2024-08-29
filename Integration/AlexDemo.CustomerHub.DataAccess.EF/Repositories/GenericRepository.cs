@@ -29,7 +29,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Repositories
 
         public async Task<IReadOnlyList<T>> GetAll()
         {
-            return await DbContext.Set<T>().ToListAsync();
+            return await DbContext.Set<T>().Where(x => x.Status != Status.Deleted).ToListAsync();
         }
 
         public async Task<T> Create(T entity)
@@ -53,7 +53,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Repositories
         /// </summary>
         /// <param name="entity">entity to physically remove from data layer</param>
         /// <returns></returns>
-        public async Task Delete(T entity)
+        public async Task HardDelete(T entity)
         {
             DbContext.Set<T>().Remove(entity);
 
@@ -63,7 +63,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Repositories
         public async Task DeleteById(TId id)
         {
             var entityToDelete = await GetById(id);
-            if (entityToDelete == null || entityToDelete?.Status == Status.Deleted)
+            if (entityToDelete == null || entityToDelete.Status == Status.Deleted)
             {
                 return;
             }

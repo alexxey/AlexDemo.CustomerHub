@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Reflection;
 using AlexDemo.CustomerHub.Presentation.WebUI.Contracts;
 using AlexDemo.CustomerHub.Presentation.WebUI.Contracts.Customer;
@@ -6,6 +7,9 @@ using AlexDemo.CustomerHub.Presentation.WebUI.Services;
 using AlexDemo.CustomerHub.Presentation.WebUI.Services.Base;
 using AlexDemo.CustomerHub.Presentation.WebUI.Services.Customer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlexDemo.CustomerHub.Presentation.WebUI
@@ -16,6 +20,27 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // localization
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("uk"),
+                new CultureInfo("sv")
+            };
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Localization");
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture("en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.FallBackToParentCultures = true;
+                options.FallBackToParentUICultures = true;
+            });
+
+            builder.Services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -24,7 +49,6 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddControllersWithViews();
 
             ConfigureServices(builder.Services);
 
@@ -49,9 +73,22 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI
 
             app.UseAuthorization();
 
+            // localization options:
+            var requestLocalizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            };
+
+            var routeRequestProvider = new RouteDataRequestCultureProvider();
+            requestLocalizationOptions.RequestCultureProviders.Insert(0, routeRequestProvider);
+
+            app.UseRequestLocalization(requestLocalizationOptions);
+
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{culture=en}/{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();

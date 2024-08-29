@@ -10,7 +10,7 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.Company
 
         public string? WebSite { get; set; }
 
-        public decimal Revenue { get; set; }
+        public decimal AnnualRevenue { get; set; }
 
         public int NumberOfEmployees { get; set; }
 

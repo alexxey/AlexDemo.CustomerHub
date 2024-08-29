@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialSetup : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,10 +25,10 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BrandName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     HeadOfficeCountry = table.Column<byte>(type: "tinyint", nullable: false),
-                    CeoName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CeoName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     WebSite = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Revenue = table.Column<decimal>(type: "decimal(15,2)", precision: 15, scale: 2, nullable: false),
+                    AnnualRevenue = table.Column<decimal>(type: "decimal(15,2)", precision: 15, scale: 2, nullable: false),
                     Currency = table.Column<byte>(type: "tinyint", nullable: false),
                     BusinessType = table.Column<byte>(type: "tinyint", nullable: false),
                     NumberOfEmployees = table.Column<int>(type: "int", nullable: false),
@@ -191,17 +191,17 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
             migrationBuilder.InsertData(
                 schema: "demo",
                 table: "Company",
-                columns: new[] { "Id", "BrandName", "BusinessType", "CeoName", "Currency", "Email", "HeadOfficeCountry", "NumberOfEmployees", "Revenue", "Status", "UpdatedOn", "WebSite" },
+                columns: new[] { "Id", "AnnualRevenue", "BrandName", "BusinessType", "CeoName", "Currency", "Email", "HeadOfficeCountry", "NumberOfEmployees", "Status", "UpdatedOn", "WebSite" },
                 values: new object[,]
                 {
-                    { 1, "Bentley", (byte)3, "Adrian Hallmark", (byte)1, "bentley@demo.com", (byte)1, 5000, 3700000m, (byte)2, new DateTime(2024, 8, 22, 21, 21, 47, 919, DateTimeKind.Utc).AddTicks(817), "www.bentleymotors.com" },
-                    { 2, "Aston Martin", (byte)3, "Amedeo Felisa", (byte)1, "aston-martin@demo.com", (byte)1, 2500, 1400000000m, (byte)2, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(831), "www.astonmartin.com" },
-                    { 3, "BMW", (byte)6, "Oliver Zipse", (byte)3, "bnw@demo.com", (byte)3, 130000, 158000000000m, (byte)1, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(835), null },
-                    { 4, "Volvo", (byte)4, "Jim Rowan", (byte)3, "volvo@demo.com", (byte)2, 40000, 36200000000m, (byte)2, new DateTime(2024, 8, 16, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(838), null },
-                    { 5, "Toyota", (byte)6, "Akio Toyoda", (byte)4, "toyota@demo.com", (byte)6, 370000, 240000000000m, (byte)3, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(842), null },
-                    { 6, "Audi", (byte)5, "Markus Duesmann", (byte)3, "audi@demo.com", (byte)3, 90000, 61400000000m, (byte)2, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(844), null },
-                    { 7, "Ford", (byte)6, "Jim Farley", (byte)2, "ford@demo.com", (byte)5, 180000, 167000000000m, (byte)2, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(846), null },
-                    { 8, "Skoda", (byte)4, "Klaus Zellmer", (byte)3, "skoda@demo.com", (byte)4, 45000, 23000000000m, (byte)1, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(848), null }
+                    { 1, 3700000m, "Bentley", (byte)3, "Adrian Hallmark", (byte)1, "bentley@demo.com", (byte)1, 5000, (byte)2, new DateTime(2024, 8, 28, 19, 3, 43, 420, DateTimeKind.Utc).AddTicks(1334), "www.bentleymotors.com" },
+                    { 2, 1400000000m, "Aston Martin", (byte)3, "Amedeo Felisa", (byte)1, "aston-martin@demo.com", (byte)1, 2500, (byte)2, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1348), "www.astonmartin.com" },
+                    { 3, 158000000000m, "BMW", (byte)6, "Oliver Zipse", (byte)3, "bnw@demo.com", (byte)3, 130000, (byte)1, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1353), null },
+                    { 4, 36200000000m, "Volvo", (byte)4, "Jim Rowan", (byte)3, "volvo@demo.com", (byte)2, 40000, (byte)2, new DateTime(2024, 8, 22, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1357), null },
+                    { 5, 240000000000m, "Toyota", (byte)6, "Akio Toyoda", (byte)4, "toyota@demo.com", (byte)6, 370000, (byte)3, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1362), null },
+                    { 6, 61400000000m, "Audi", (byte)5, "Markus Duesmann", (byte)3, "audi@demo.com", (byte)3, 90000, (byte)2, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1364), null },
+                    { 7, 167000000000m, "Ford", (byte)6, "Jim Farley", (byte)2, "ford@demo.com", (byte)5, 180000, (byte)2, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1366), null },
+                    { 8, 23000000000m, "Skoda", (byte)4, "Klaus Zellmer", (byte)3, "skoda@demo.com", (byte)4, 45000, (byte)1, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(1368), null }
                 });
 
             migrationBuilder.InsertData(
@@ -210,8 +210,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                 columns: new[] { "Id", "CompanyId", "Country", "IsHeadOffice", "Name", "NumberOfEmployees", "OfficeCode", "Status", "UpdatedOn", "ZipCode" },
                 values: new object[,]
                 {
-                    { 1, 1, (byte)1, true, "Bentley Motors Crewe", 4000, "BNTL-1", (byte)0, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(1979), "CW1 3PL" },
-                    { 2, 2, (byte)1, true, "Aston Martin Gaydon", 100, "ASTN-1", (byte)0, new DateTime(2024, 8, 22, 21, 22, 47, 919, DateTimeKind.Utc).AddTicks(1982), "CV35 0DB" }
+                    { 1, 1, (byte)1, true, "Bentley Motors Crewe", 4000, "BNTL-1", (byte)0, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(2421), "CW1 3PL" },
+                    { 2, 2, (byte)1, true, "Aston Martin Gaydon", 100, "ASTN-1", (byte)0, new DateTime(2024, 8, 28, 19, 4, 43, 420, DateTimeKind.Utc).AddTicks(2423), "CV35 0DB" }
                 });
 
             migrationBuilder.InsertData(
@@ -220,9 +220,9 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                 columns: new[] { "Id", "CompanyId", "CompanyRole", "DateOfBirth", "Email", "FirstName", "LastName", "Login", "PasswordHash", "PasswordSalt", "PrimaryOfficeId", "Status", "Title", "UpdatedOn" },
                 values: new object[,]
                 {
-                    { 1, 1, (byte)0, new DateTime(1981, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "test.bentley@bentley.com", "Test", "Sir", "test.bentley", "GLHedsmFUt6kqasyxn6KsGsf/mThOme6ElLZm/fw0bU=", "svnVSv8cVzCQQyV2zELixw==", 1, (byte)0, "Mr", new DateTime(2024, 8, 22, 21, 22, 47, 921, DateTimeKind.Utc).AddTicks(1917) },
-                    { 2, 2, (byte)0, new DateTime(1983, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "test.aston@aston.com", "Test", "Madam", "test.aston", "kPS45Rsoy687P9g5rorhqwFyI4te+X9VN93JUy3xORs=", "FbPm7DDOeQ6+pCmhzq7Xzg==", 2, (byte)0, "Mrs", new DateTime(2024, 8, 22, 21, 22, 47, 922, DateTimeKind.Utc).AddTicks(9843) },
-                    { 3, 1, (byte)0, new DateTime(1999, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "user.bentley@aston.com", null, null, "user.benntley", "xluP2jDFdbsjpbyuDoKMuUQ4yY/QdI0RyyqmHs+A7Bc=", "ifFB0wyDuyULpIwXkGF6rg==", 1, (byte)0, null, new DateTime(2024, 8, 22, 21, 22, 47, 924, DateTimeKind.Utc).AddTicks(9136) }
+                    { 1, 1, (byte)0, new DateTime(1981, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "test.bentley@bentley.com", "Test", "Sir", "test.bentley", "zovGOA3YWAS3zvq2u2ZOk1KIJjxouLbICvRWhaOruKE=", "MYl5TjrpFHEPQfwJ3VpaoQ==", 1, (byte)0, "Mr", new DateTime(2024, 8, 28, 19, 4, 43, 426, DateTimeKind.Utc).AddTicks(8312) },
+                    { 2, 2, (byte)0, new DateTime(1983, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "test.aston@aston.com", "Test", "Madam", "test.aston", "ZbXlzKwPR37xs9Wg07PSrIWFF/cQHbYlYubwApCFJjc=", "6k3rIbC7f0Os16HWelRuKg==", 2, (byte)0, "Mrs", new DateTime(2024, 8, 28, 19, 4, 43, 428, DateTimeKind.Utc).AddTicks(6577) },
+                    { 3, 1, (byte)0, new DateTime(1999, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "user.bentley@aston.com", null, null, "user.benntley", "s6JoPoGMlg/Cts3MlJLe1nIPHTOqOrPjrYoIaiqCF+0=", "88ZY+gDfqCTvuA5tRWsTmQ==", 1, (byte)0, null, new DateTime(2024, 8, 28, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(4725) }
                 });
 
             migrationBuilder.InsertData(
@@ -231,15 +231,15 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                 columns: new[] { "Id", "CompanyId", "Description", "EndDate", "Name", "ProjectBudget", "ProjectCode", "ProjectOwnerId", "ProjectStatus", "ResponsibleOfficeId", "StartDate", "Status", "UpdatedOn" },
                 values: new object[,]
                 {
-                    { 1, 1, "test bentley project", null, "first bentley project", 0m, "BNTL-TEST", 1, (byte)0, 1, new DateTime(2024, 8, 29, 21, 22, 47, 925, DateTimeKind.Utc).AddTicks(20), (byte)1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 1, "second test bentley project", null, "second bentley project", 0m, "BNTL-TEST-2", 1, (byte)0, 1, new DateTime(2024, 8, 23, 21, 22, 47, 925, DateTimeKind.Utc).AddTicks(27), (byte)1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, "test bentley project", null, "first bentley project", 0m, "BNTL-TEST", 1, (byte)0, 1, new DateTime(2024, 9, 4, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(5867), (byte)1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 1, "second test bentley project", null, "second bentley project", 0m, "BNTL-TEST-2", 1, (byte)0, 1, new DateTime(2024, 8, 29, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(5876), (byte)1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 schema: "demo",
                 table: "ProjectUser",
                 columns: new[] { "Id", "CurrentRole", "EndDate", "PositionDescription", "ProjectId", "StartDate", "Status", "UpdatedOn", "UserId" },
-                values: new object[] { 1L, (byte)1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, new DateTime(2024, 8, 22, 21, 22, 47, 925, DateTimeKind.Utc).AddTicks(757), (byte)2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
+                values: new object[] { 1L, (byte)1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, new DateTime(2024, 8, 28, 19, 4, 43, 430, DateTimeKind.Utc).AddTicks(6630), (byte)2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Company_BrandName",
@@ -259,7 +259,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Migrations
                 schema: "demo",
                 table: "Company",
                 column: "Email",
-                unique: true);
+                unique: true,
+                filter: "[Email] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CompanyOffice_CompanyId",

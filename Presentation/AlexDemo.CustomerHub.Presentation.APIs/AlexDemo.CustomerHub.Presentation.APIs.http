@@ -1,6 +1,6 @@
 @AlexDemo.CustomerHub.Presentation.APIs_HostAddress = http://localhost:5133
 
-GET {{AlexDemo.CustomerHub.Presentation.APIs_HostAddress}}/weatherforecast/
+GET {{AlexDemo.CustomerHub.Presentation.APIs_HostAddress}}/company/
 Accept: application/json
 
 ###

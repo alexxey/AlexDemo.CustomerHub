@@ -2,7 +2,8 @@
 {
 	public enum Currency : byte
 	{
-		GBP = 1,
+        NotDefined = 0,
+        GBP = 1,
 		USD = 2,
 		EURO = 3,
 		JPY = 4

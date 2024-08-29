@@ -68,7 +68,7 @@ namespace AlexDemo.CustomerHub.Presentation.APIs.Controllers
 
         // DELETE api/<CompanyController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BaseModifyCommandResponse<int>>> Delete(int id)
+        public async Task<ActionResult<DeleteCompanyCommandResponse>> Delete(int id)
         {
             var command = new DeleteCompanyCommand
             {

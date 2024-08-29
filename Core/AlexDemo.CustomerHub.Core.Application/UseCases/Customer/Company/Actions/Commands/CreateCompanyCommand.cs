@@ -8,6 +8,6 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Action
         /// <summary>
         /// there's no point to duplicate exact same fields that are stored in DTO: simply use this DTO as a property inside request
         /// </summary>
-        public CreateCompanyDto CreateDto { get; set; }
+        public required CreateCompanyDto CreateDto { get; set; }
     }
 }

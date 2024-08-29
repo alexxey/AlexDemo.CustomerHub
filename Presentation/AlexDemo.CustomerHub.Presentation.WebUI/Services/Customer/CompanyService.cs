@@ -38,6 +38,14 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Services.Customer
             return companyVm;
         }
 
+        public async Task<CompanyDetailsDto> GetDtoDetailsById(int id)
+        {
+            var companyDto = await _client.CompanyGETAsync(id);
+            
+            // todo alex : add additional mapping routine if/when needed
+            return companyDto;
+        }
+
         public async Task<Response<int>> CreateCompany(CreateCompanyVm createVm)
         {
             try
@@ -56,9 +64,12 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Services.Customer
                 else
                 {
                     // todo alex : filter details using validation model error types
-                    foreach (ResponseMessageModel? messageModel in apiResponse.Data)
+                    if (apiResponse.Data != null)
                     {
-                        response.ValidationErrors += messageModel.Message + Environment.NewLine;
+                        foreach (ResponseMessageModel? messageModel in apiResponse.Data)
+                        {
+                            response.ValidationErrors += messageModel.Message + Environment.NewLine;
+                        }
                     }
                 }
 

@@ -34,7 +34,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.CompanyOffice.
                 throw new ApplicationException("Entity already deleted");
             }
 
-            await _companyOfficeRepository.Delete(companyOffice);
+            await _companyOfficeRepository.HardDelete(companyOffice);
 
             return Unit.Value;
         }

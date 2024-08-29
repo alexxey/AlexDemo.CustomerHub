@@ -89,7 +89,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
             modelBuilder.Entity<Company>().Property(c => c.WebSite)
                 .HasMaxLength(EntityConstraints.CommonSettings.LongStringLength);
 
-            modelBuilder.Entity<Company>().Property(c => c.Revenue)
+            modelBuilder.Entity<Company>().Property(c => c.AnnualRevenue)
                 .HasPrecision(15, 2);
 
             // indexes

@@ -1,4 +1,8 @@
 ﻿using AlexDemo.CustomerHub.Presentation.WebUI.Contracts.Customer;
+using AlexDemo.CustomerHub.Presentation.WebUI.Models.ViewModels.Customer.Company;
+
+using AutoMapper;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlexDemo.CustomerHub.Presentation.WebUI.Controllers
@@ -6,10 +10,12 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Controllers
     public class CompanyController : Controller
     {
         private readonly ICompanyService _companyService;
+        private readonly IMapper _mapper;
 
-        public CompanyController(ICompanyService companyService)
+        public CompanyController(ICompanyService companyService, IMapper mapper)
         {
             _companyService = companyService;
+            _mapper = mapper;
         }
 
         // GET: CompanyController
@@ -37,58 +43,76 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Controllers
         // POST: CompanyController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(CreateCompanyVm createCompanyVm)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var response = await _companyService.CreateCompany(createCompanyVm);
+                if (response.IsSuccessful)
+                {
+                    return RedirectToAction(nameof(Details), new { id = response.Data });
+                }
+                ModelState.AddModelError("", response.ValidationErrors);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
             }
+
+            return View();
         }
 
         // GET: CompanyController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var companyDetailsDto = await _companyService.GetDtoDetailsById(id);
+            UpdateCompanyVm updateVm = _mapper.Map<UpdateCompanyVm>(companyDetailsDto);
+
+            return View(updateVm);
         }
 
         // POST: CompanyController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, UpdateCompanyVm updateCompanyVm)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var response = await _companyService.UpdateCompany(id, updateCompanyVm);
+                if (response.IsSuccessful)
+                {
+                    return RedirectToAction(nameof(Details), new { id = response.Data });
+                }
+                ModelState.AddModelError("", response.ValidationErrors);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
             }
-        }
 
-        // GET: CompanyController/Delete/5
-        public ActionResult Delete(int id)
-        {
             return View();
         }
 
         // POST: CompanyController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var deleteResponse = await _companyService.DeleteCompany(id);
+                if (deleteResponse.IsSuccessful)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                ModelState.AddModelError("", deleteResponse.ValidationErrors);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
             }
+
+            return BadRequest();
         }
     }
 }

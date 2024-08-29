@@ -10,6 +10,8 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Contracts.Customer
 
         Task<CompanyDetailsVm> GetDetailsById(int id);
 
+        Task<CompanyDetailsDto> GetDtoDetailsById(int id);
+
         Task<Response<int>> CreateCompany(CreateCompanyVm createVm);
 
         Task<Response<int>> UpdateCompany(int id, UpdateCompanyVm updateVm);

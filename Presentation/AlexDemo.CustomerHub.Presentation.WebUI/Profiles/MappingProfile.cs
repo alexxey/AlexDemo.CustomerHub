@@ -11,6 +11,12 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Profiles
             // customer
             CreateMap<CompanyDetailsDto, CompanyDetailsVm>().ReverseMap();
             CreateMap<CompanyListItemDto, CompanyListItemVm>().ReverseMap();
+            CreateMap<CreateCompanyDto, CreateCompanyVm>().ReverseMap();
+            CreateMap<UpdateCompanyDto, UpdateCompanyVm>().ReverseMap();
+
+            CreateMap<CompanyDetailsDto, UpdateCompanyVm>().ReverseMap();
+
+            //portfolio
         }
     }
 }
