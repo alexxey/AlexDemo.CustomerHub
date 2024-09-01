@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Contracts\Validators\Portfolio\" />
     <Folder Include="UseCases\Common\Actions\Queries\" />
     <Folder Include="UseCases\Common\Handlers\Commands\" />
     <Folder Include="UseCases\Common\Handlers\Queries\" />

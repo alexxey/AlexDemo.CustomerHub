@@ -8,8 +8,10 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Models.ViewModels.Customer.Com
         [Display(Name = "Ceo")]
         public string? CeoName { get; set; }
 
+        [EmailAddress]
         public string? Email { get; set; }
 
+        [Url]
         public string? WebSite { get; set; }
 
         [Display(Name = "Annual Revenue")]

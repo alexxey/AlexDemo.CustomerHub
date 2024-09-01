@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -15,7 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
-    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="NetArchTest.Rules" Version="1.3.2" />
     <PackageReference Include="xunit" Version="2.9.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
       <PrivateAssets>all</PrivateAssets>
@@ -25,15 +25,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\AlexDemo.CustomerHub.Core.Application\AlexDemo.CustomerHub.Core.Application.csproj" />
+    <ProjectReference Include="..\..\..\Core\AlexDemo.CustomerHub.Core\AlexDemo.CustomerHub.Core.csproj" />
+    <ProjectReference Include="..\..\..\Integration\AlexDemo.CustomerHub.DataAccess.EF\AlexDemo.CustomerHub.DataAccess.EF.csproj" />
+    <ProjectReference Include="..\..\..\Integration\AlexDemo.CustomerHub.Identity\AlexDemo.CustomerHub.Identity.csproj" />
+    <ProjectReference Include="..\..\..\Integration\AlexDemo.CustomerHub.Infrastructure\AlexDemo.CustomerHub.Infrastructure.csproj" />
     <ProjectReference Include="..\..\..\Presentation\AlexDemo.CustomerHub.Presentation.APIs\AlexDemo.CustomerHub.Presentation.APIs.csproj" />
+    <ProjectReference Include="..\..\..\Presentation\AlexDemo.CustomerHub.Presentation.WebUI\AlexDemo.CustomerHub.Presentation.WebUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mocks\" />
   </ItemGroup>
 
 </Project>

@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Infras
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Presentation.APIs.UnitTests", "Tests\Unit\AlexDemo.CustomerHub.Presentation.APIs.UnitTests\AlexDemo.CustomerHub.Presentation.APIs.UnitTests.csproj", "{D9F78969-9CFE-4E5E-AC31-FEAE762629C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Identity", "Integration\AlexDemo.CustomerHub.Identity\AlexDemo.CustomerHub.Identity.csproj", "{EFD0C7A1-E9C6-4536-9EBB-7467CF5D92FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlexDemo.CustomerHub.Identity", "Integration\AlexDemo.CustomerHub,Identity\AlexDemo.CustomerHub.Identity.csproj", "{EFD0C7A1-E9C6-4536-9EBB-7467CF5D92FF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{8105AB64-C93D-49FE-A50A-189F9A05021F}"
 EndProject

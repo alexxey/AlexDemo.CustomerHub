@@ -1,4 +1,5 @@
-﻿using AlexDemo.CustomerHub.Core.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using AlexDemo.CustomerHub.Core.Enums;
 using AlexDemo.CustomerHub.Core.Enums.Customer;
 
 namespace AlexDemo.CustomerHub.Presentation.WebUI.Models.ViewModels.Customer.Company
@@ -11,6 +12,7 @@ namespace AlexDemo.CustomerHub.Presentation.WebUI.Models.ViewModels.Customer.Com
 
         public required string CeoName { get; set; }
 
+        [EmailAddress]
         public required string Email { get; set; }
 
         public string? WebSite { get; set; }
