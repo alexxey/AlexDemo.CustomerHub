@@ -23,6 +23,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
 
         public async Task<UpdateCompanyCommandResponse> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
         {
+            // always capture original Id of the underlying entity
             var response = new UpdateCompanyCommandResponse
             {
                 Id = request.UpdateDto.Id
@@ -62,7 +63,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Handle
             companyToUpdate.BusinessType = CompanyMetadataServiceProvider.DefineBusinessTypeModel(companyToUpdate);
 
             await _companyRepository.Update(companyToUpdate);
-
+            
             response.IsSuccessful = true;
             response.Message = "Company updated";
             return response;
