@@ -11,8 +11,8 @@ namespace AlexDemo.CustomerHub.Core.Application.UnitTests.UseCases.Customer.Comp
 {
     public class CreateCompanyCommandHandlerTests
     {
-        private readonly Mock<ICompanyRepository> _companyRepositoryMock = new Mock<ICompanyRepository>();
-        private readonly Mock<IMapper> _mapperMock = new Mock<IMapper>();
+        private readonly Mock<ICompanyRepository> _companyRepositoryMock = new();
+        private readonly Mock<IMapper> _mapperMock = new();
 
         [Fact]
         public async Task Handle_ValidInfo_ShouldCreateSuccessResult()
@@ -26,11 +26,6 @@ namespace AlexDemo.CustomerHub.Core.Application.UnitTests.UseCases.Customer.Comp
                 NumberOfEmployees = 123
             };
 
-            var createCompanyCommand = new CreateCompanyCommand
-            {
-                CreateDto = createCompanyDto
-            };
-
             var companyEntity = new Entities.Customer.Company
             {
                 BrandName = createCompanyDto.BrandName,
@@ -41,29 +36,42 @@ namespace AlexDemo.CustomerHub.Core.Application.UnitTests.UseCases.Customer.Comp
                 Id = 12345
             };
 
-            var createCompanyResponse = new CreateCompanyCommandResponse
+            var createCompanyCommand = new CreateCompanyCommand
             {
-                Data = null,
+                CreateDto = createCompanyDto
+            };
+
+            var createCompanyCommandHandler = new CreateCompanyCommandHandler(_companyRepositoryMock.Object, _mapperMock.Object);
+
+            // todo alex: validation setup?
+            _companyRepositoryMock.Setup(x => x.Create(
+                    It.IsAny<Entities.Customer.Company>()))
+                .ReturnsAsync(companyEntity);
+
+            // setup mapping for particular entity only (match by brand and country)
+            _mapperMock.Setup(x => x.Map<Entities.Customer.Company>(
+                It.Is<CreateCompanyDto>(dto =>
+                    dto.BrandName == createCompanyDto.BrandName &&
+                    dto.HeadOfficeCountry == createCompanyDto.HeadOfficeCountry)))
+                .Returns(companyEntity);
+
+            var expectedCreateCompanyResponse = new CreateCompanyCommandResponse
+            {
                 Id = companyEntity.Id,
                 IsSuccessful = true,
                 Message = "Company created"
             };
 
-            var createCompanyCommandHandler = new CreateCompanyCommandHandler(_companyRepositoryMock.Object, _mapperMock.Object);
-
-            _companyRepositoryMock.Setup(x => x.Create(
-                    It.IsAny<Entities.Customer.Company>()))
-                .ReturnsAsync(companyEntity);
-
-            _mapperMock.Setup(x => x.Map<Entities.Customer.Company>(
-                It.IsAny<CreateCompanyDto>))
-                .Returns(companyEntity);
-
             // act 
-           var result = await  createCompanyCommandHandler.Handle(createCompanyCommand, CancellationToken.None);
+            var actualCreateCompanyCommandResponse = await  createCompanyCommandHandler.Handle(createCompanyCommand, CancellationToken.None);
 
             // assert
-            Assert.True(result.IsSuccessful);
+            // ensure that response is of expected type
+            Assert.IsType<CreateCompanyCommandResponse>(actualCreateCompanyCommandResponse);
+
+            // additional checks : but we set this ourselves earlier
+            Assert.True(actualCreateCompanyCommandResponse.IsSuccessful);
+            Assert.Equal(expectedCreateCompanyResponse.Id, actualCreateCompanyCommandResponse.Id);
         }
     }
 }
