@@ -22,7 +22,8 @@ namespace AlexDemo.CustomerHub.Identity.Configurations
                     UserName = "test-admin",
                     NormalizedUserName = "TEST-ADMIN",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Welcome1")
+                    PasswordHash = hasher.HashPassword(null, "Welcome1"),
+                    CompanyId = 1
                 },
                 new ApplicationUser
                 {
@@ -34,7 +35,8 @@ namespace AlexDemo.CustomerHub.Identity.Configurations
                     UserName = "test-employee",
                     NormalizedUserName = "TEST-EMPLOYEE",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Welcome2")
+                    PasswordHash = hasher.HashPassword(null, "Welcome2"),
+                    CompanyId = 1
                 },
                 new ApplicationUser
                 {
@@ -46,7 +48,8 @@ namespace AlexDemo.CustomerHub.Identity.Configurations
                     UserName = "test-visitor",
                     NormalizedUserName = "TEST-VISITOR",
                     EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Welcome3")
+                    PasswordHash = hasher.HashPassword(null, "Welcome3"),
+                    CompanyId = 1
                 }
             );
         }
