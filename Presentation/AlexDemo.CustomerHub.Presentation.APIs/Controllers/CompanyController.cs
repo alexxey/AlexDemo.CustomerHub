@@ -4,6 +4,7 @@ using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Co
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Queries;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.Company.Actions.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -46,6 +47,7 @@ namespace AlexDemo.CustomerHub.Presentation.APIs.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize]
         public async Task<ActionResult<CreateCompanyCommandResponse>> Post([FromBody] CreateCompanyDto createDto)
         {
             var command = new CreateCompanyCommand {CreateDto = createDto};
@@ -59,6 +61,7 @@ namespace AlexDemo.CustomerHub.Presentation.APIs.Controllers
 
         // PUT api/<CompanyController>/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<UpdateCompanyCommandResponse>> Put(int id, [FromBody] UpdateCompanyDto updateDto)
         {
             var command = new UpdateCompanyCommand { UpdateDto = updateDto };
@@ -68,6 +71,7 @@ namespace AlexDemo.CustomerHub.Presentation.APIs.Controllers
 
         // DELETE api/<CompanyController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<DeleteCompanyCommandResponse>> Delete(int id)
         {
             var command = new DeleteCompanyCommand
