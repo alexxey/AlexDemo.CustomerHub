@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
@@ -25,7 +24,6 @@ namespace AlexDemo.CustomerHub.Identity.Services
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtSettings = jwtSettings.Value;
-
         }
 
         public async Task<AuthResponse> Login(AuthRequest authRequest)
@@ -45,12 +43,12 @@ namespace AlexDemo.CustomerHub.Identity.Services
                 throw new Exception($"Credentials for {authRequest.Email} are not valid");
             }
 
-            JwtSecurityToken jwtSecurityToken = await GenerateSecurityToken(user);
+            JwtSecurityToken jwtSecurityToken = await GenerateSecurityToken(user, authRequest.CompanyId.ToString());
 
             AuthResponse authResponse = new AuthResponse
             {
                 Id = user.Id,
-                CompanyId = user.CompanyId,
+                CompanyId = authRequest.CompanyId,
                 Email = user.Email,
                 UserName = user.UserName,
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken)
@@ -67,27 +65,33 @@ namespace AlexDemo.CustomerHub.Identity.Services
                 throw new Exception($"user with {registrationRequest.UserName} already exists");
             }
 
-            // option to generate hash and salt settings
             PasswordServiceProvider.CreatePasswordHash(registrationRequest.Password, out byte[] passwordHash, out byte[] passwordSalt);
             
-            // current approach : to be replaced with new one
-            var passwordHashCurrent = new PasswordHasher<ApplicationUser>().HashPassword(null, registrationRequest.Password);
-
             var userToRegister = new ApplicationUser
             {
                 Email = registrationRequest.Email,
                 UserName = registrationRequest.UserName,
-                CompanyId = registrationRequest.CompanyId,
-                FirstName = registrationRequest.FirstName,
-                LastName = registrationRequest.LastName,
-                PasswordHash = passwordHashCurrent // Convert.ToBase64String(passwordHash),
-                // PasswordSalt = Convert.ToBase64String(passwordSalt)
+                PasswordHash = Convert.ToBase64String(passwordHash),
+                PasswordSalt = Convert.ToBase64String(passwordSalt)
             };
 
-            throw new NotImplementedException();
+            // Create the user using UserManager
+            var registrationResult = await _userManager.CreateAsync(userToRegister);
+            if (!registrationResult.Succeeded)
+            {
+                throw new Exception($"Failed to register user: {string.Join(", ", registrationResult.Errors.Select(e => e.Description))}");
+            }
+
+            // todo : assign roles or additional user claims here if needed.
+            // await _userManager.AddToRoleAsync(userToRegister, "User");
+
+            return new RegistrationResponse
+            {
+                UserId = userToRegister.Id
+            };
         }
 
-        private async Task<JwtSecurityToken> GenerateSecurityToken(ApplicationUser user)
+        private async Task<JwtSecurityToken> GenerateSecurityToken(ApplicationUser user, string companyId)
         {
             IList<Claim> userClaims = await _userManager.GetClaimsAsync(user);
             IList<string> roles = await _userManager.GetRolesAsync(user);
@@ -105,7 +109,7 @@ namespace AlexDemo.CustomerHub.Identity.Services
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.AuthTime, DateTime.UtcNow.ToUniversalTime().ToString()),
                 new Claim(CustomClaimTypes.UserId, user.Id),
-                new Claim(CustomClaimTypes.CompanyId, user.CompanyId.ToString(), "int")
+                new Claim(CustomClaimTypes.CompanyId, companyId, "int")
             }
             .Union(userClaims)
             .Union(roleClaims);

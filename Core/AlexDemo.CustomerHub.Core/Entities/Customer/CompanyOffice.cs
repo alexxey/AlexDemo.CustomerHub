@@ -23,7 +23,7 @@ namespace AlexDemo.CustomerHub.Core.Entities.Customer
 
         public int CompanyId { get; set; }
 
-        public List<User>? Users { get; set; } = [];
+        public List<CompanyUser>? Users { get; set; } = [];
 
         public List<Project>? Projects { get; set; } = [];
     }

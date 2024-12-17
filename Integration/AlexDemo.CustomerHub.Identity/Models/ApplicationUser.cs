@@ -7,13 +7,6 @@ namespace AlexDemo.CustomerHub.Identity.Models
     /// </summary>
     public sealed class ApplicationUser : IdentityUser
     {
-        public string? FirstName { get; set; }
-
-        public string? LastName { get; set; }
-
-        [ProtectedPersonalData]
-        public int CompanyId { get; set; }
-
         [ProtectedPersonalData]
         public string? PasswordSalt { get; set; }
     }

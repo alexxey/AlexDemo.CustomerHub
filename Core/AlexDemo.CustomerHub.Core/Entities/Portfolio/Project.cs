@@ -31,7 +31,7 @@ namespace AlexDemo.CustomerHub.Core.Entities.Portfolio
 
         public int ProjectOwnerId { get; set; }
 
-        public User? ProjectOwner { get; set; }
+        public CompanyUser? ProjectOwner { get; set; }
 
         public List<ProjectUser>? ProjectUsers { get; set; } = [];
     }

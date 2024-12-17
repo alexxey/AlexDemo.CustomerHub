@@ -13,7 +13,7 @@ namespace AlexDemo.CustomerHub.Core.Entities.Portfolio
 
         public int UserId { get; set; }
 
-        public User? User { get; set; }
+        public CompanyUser? User { get; set; }
 
         public DateTime StartDate { get; set; }
 

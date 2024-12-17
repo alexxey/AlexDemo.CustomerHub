@@ -1,7 +1,8 @@
-﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Identity;
+using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
 using AlexDemo.CustomerHub.Core.Application.Exceptions;
 using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User.Constraints;
-using AlexDemo.CustomerHub.Core.Application.ServiceProviders;
+using AlexDemo.CustomerHub.Core.Application.Models.Identity;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Actions.Commands;
 
 namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Handlers.Commands
@@ -10,10 +11,14 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Handlers.
     {
         private readonly IUserRepository _userRepository;
         private readonly ICompanyOfficeRepository _companyOfficeRepository;
+
+        private readonly IAuthService _authService;
+
         private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IUserRepository userRepository, ICompanyOfficeRepository companyOfficeRepository, IMapper mapper)
+        public CreateUserCommandHandler(IAuthService authService, IUserRepository userRepository, ICompanyOfficeRepository companyOfficeRepository, IMapper mapper)
         {
+            _authService = authService;
             _userRepository = userRepository;
             _companyOfficeRepository = companyOfficeRepository;
             _mapper = mapper;
@@ -36,13 +41,21 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Handlers.
                 throw new ArgumentException("Login is not available");
             }
 
-            var user = _mapper.Map<Entities.Customer.User>(request.CreateDto);
+            // create auth registration service call
+            var registrationResponse = await _authService.Register(new RegistrationRequest
+            {
+                Email = request.CreateDto.Email,
+                Password = request.CreateDto.Password,
+                UserName = request.CreateDto.Login
+            });
 
-            // set password details
-            PasswordServiceProvider.CreatePasswordHash(request.CreateDto.Password, out byte[] hash, out byte[] salt);
+            if (!string.IsNullOrWhiteSpace(registrationResponse?.UserId))
+            {
+                throw new ApplicationException("Unable to register user");
+            }
 
-            user.PasswordHash = Convert.ToBase64String(hash);
-            user.PasswordSalt = Convert.ToBase64String(salt);
+            var user = _mapper.Map<Entities.Customer.CompanyUser>(request.CreateDto);
+            user.IdentityUserId = registrationResponse.UserId;
 
             user = await _userRepository.Create(user);
             return user.Id;

@@ -15,7 +15,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
     {
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyOffice> CompanyOffices { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<CompanyUser> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectUser> ProjectUsers { get; set; }
 
@@ -143,47 +143,48 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
         private void DefineUserConfiguration(ModelBuilder modelBuilder)
         {
             // common structure and rules
-            modelBuilder.Entity<User>().ToTable(DbConstants.Domain.EntityNames.UserEntityName)
+            modelBuilder.Entity<CompanyUser>().ToTable(DbConstants.Domain.EntityNames.UserEntityName)
                 .HasKey(c => c.Id);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<CompanyUser>()
                 .Property(c => c.Id)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<User>().Property(c => c.Login)
+            modelBuilder.Entity<CompanyUser>()
+                .Property(x => x.IdentityUserId)
+                .IsRequired();
+
+            modelBuilder.Entity<CompanyUser>().Property(c => c.DisplayName)
                 .HasMaxLength(EntityConstraints.Domain.UserSettings.LoginLength)
                 .IsRequired();
 
-            modelBuilder.Entity<User>().Property(c => c.Title)
+            modelBuilder.Entity<CompanyUser>().Property(c => c.Title)
                 .HasMaxLength(EntityConstraints.CommonSettings.ExtraShortStringLength);
 
-            modelBuilder.Entity<User>().Property(c => c.FirstName)
+            modelBuilder.Entity<CompanyUser>().Property(c => c.FirstName)
                 .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength);
 
-            modelBuilder.Entity<User>().Property(c => c.LastName)
+            modelBuilder.Entity<CompanyUser>().Property(c => c.LastName)
                 .HasMaxLength(EntityConstraints.CommonSettings.ShortStringLength);
 
             modelBuilder.Entity<Company>().Property(c => c.Email)
                 .HasMaxLength(EntityConstraints.CommonSettings.EmailAddressLength);
 
-            modelBuilder.Entity<User>().Property(c => c.PasswordHash)
-                .HasMaxLength(EntityConstraints.Domain.UserSettings.PasswordHash)
-                .IsRequired();
-
-            modelBuilder.Entity<User>().Property(c => c.PasswordSalt)
-                .HasMaxLength(EntityConstraints.Domain.UserSettings.PasswordSalt)
-                .IsRequired();
-
-            modelBuilder.Entity<User>().Property(c => c.DateOfBirth)
+            modelBuilder.Entity<CompanyUser>().Property(c => c.DateOfBirth)
                 .HasColumnType(DbConstants.CommonSettings.DateTimeDateOnlyFormat);
 
             // indexes
 
             // constraints
-            modelBuilder.Entity<User>()
-                .HasIndex(c => c.Login)
+            modelBuilder.Entity<CompanyUser>()
+                .HasIndex(c => c.DisplayName)
                 .IsUnique()
                 .HasDatabaseName("IX_UX_User_Login");
+
+            modelBuilder.Entity<CompanyUser>()
+                .HasIndex(c => c.IdentityUserId)
+                .IsUnique()
+                .HasDatabaseName("IX_UX_User_IdentityId");
         }
         #endregion
 
@@ -278,7 +279,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.DbContexts
                 .WithOne(o => o.ResponsibleOffice)
                 .HasForeignKey(o => o.ResponsibleOfficeId);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<CompanyUser>()
                 .HasMany(c => c.Projects)
                 .WithOne(o => o.ProjectOwner)
                 .HasForeignKey(o => o.ProjectOwnerId)

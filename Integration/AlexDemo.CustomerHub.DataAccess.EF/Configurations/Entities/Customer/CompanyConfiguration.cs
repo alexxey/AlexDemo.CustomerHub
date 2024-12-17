@@ -14,9 +14,25 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Configurations.Entities.Customer
         {
             int dynamicCompanyId = 1;
 
-            var bentleyCompany = new Company
+            var alexCompany = new Company
             {
                 Id = dynamicCompanyId,
+                BrandName = "alexDemo",
+                Email = "alexDemos@customerhub.com",
+                Status = Status.Active,
+                UpdatedOn = DateTime.UtcNow.AddMinutes(-1),
+                HeadOfficeCountry = Country.UnitedKingdom,
+                CeoName = "Oleksiy",
+                Currency = Currency.GBP,
+                BusinessType = BusinessType.NotSpecified,
+                NumberOfEmployees = 2,
+                AnnualRevenue = 1,
+                WebSite = "www.alexdemos.com"
+            };
+
+            var bentleyCompany = new Company
+            {
+                Id = ++dynamicCompanyId,
                 BrandName = "Bentley",
                 Email = "bentley@demo.com",
                 Status = Status.Active,
@@ -48,6 +64,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Configurations.Entities.Customer
 
             // Seed data for the Customers table
             modelBuilder.HasData(
+                alexCompany,
                 bentleyCompany,
                 astonMartinCompany,
                 new Company { Id = ++dynamicCompanyId, BrandName = "BMW", Email = "bnw@demo.com", Status = Status.Draft, UpdatedOn = DateTime.UtcNow, HeadOfficeCountry = Country.Germany, CeoName = "Oliver Zipse", Currency = Currency.EURO, BusinessType = BusinessType.GlobalConglomerate, NumberOfEmployees = 130000, AnnualRevenue = 158000000000 },

@@ -25,11 +25,7 @@ namespace AlexDemo.CustomerHub.Presentation.APIs
             
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Customer hub and customer portfolio demo API", Version = "v1"});
-            });
-
+           
             builder.Services.AddCors(o =>
             {
                 o.AddPolicy("CorsPolicy",

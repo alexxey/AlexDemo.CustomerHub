@@ -3,9 +3,17 @@ using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Entities.Customer
 {
-    public sealed class User : BaseMonitoredEntity
+    /// <summary>
+    /// business logic related entity to store company-office: user relations only
+    /// </summary>
+    public sealed class CompanyUser : BaseMonitoredEntity
     {
         public int Id { get; set; }
+
+        /// <summary>
+        /// reference to the identity user entity that store login and other authentication user's specific data
+        /// </summary>
+        public required string IdentityUserId { get; set; } 
 
         public string? Title { get; set; }
 
@@ -15,11 +23,7 @@ namespace AlexDemo.CustomerHub.Core.Entities.Customer
 
         public DateTime DateOfBirth { get; set; }
 
-        public required string Login { get; set; }
-
-        public required string PasswordHash { get; set; }
-
-        public required string PasswordSalt { get; set; }
+        public required string DisplayName { get; set; }
 
         public EmployeeCompanyRole CompanyRole { get; set; }
 

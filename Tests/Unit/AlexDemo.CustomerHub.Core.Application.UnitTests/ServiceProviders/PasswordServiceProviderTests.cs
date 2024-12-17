@@ -1,6 +1,4 @@
 ﻿using AlexDemo.CustomerHub.Core.Application.ServiceProviders;
-using AlexDemo.CustomerHub.Core.Entities.Customer;
-using AlexDemo.CustomerHub.Core.Enums;
 
 namespace AlexDemo.CustomerHub.Core.Application.UnitTests.ServiceProviders
 {
@@ -56,10 +54,10 @@ namespace AlexDemo.CustomerHub.Core.Application.UnitTests.ServiceProviders
             // arrange
             PasswordServiceProvider.CreatePasswordHash(password, out byte[] hash, out byte[] salt);
 
-            var userEntity = BuildUser(hash, salt);
+            var passwordData = BuildPasswordData(hash, salt);
 
-            var restoredHash = Convert.FromBase64String(userEntity.PasswordHash);
-            var restoredSalt = Convert.FromBase64String(userEntity.PasswordSalt);
+            var restoredHash = Convert.FromBase64String(passwordData.Item1);
+            var restoredSalt = Convert.FromBase64String(passwordData.Item2);
 
             // act
             var areChecksValid = PasswordServiceProvider.VerifyPasswordHash(password, restoredHash, restoredSalt);
@@ -80,10 +78,10 @@ namespace AlexDemo.CustomerHub.Core.Application.UnitTests.ServiceProviders
             // arrange
             PasswordServiceProvider.CreatePasswordHash(password, out byte[] hash, out byte[] salt);
 
-            var userEntity = BuildUser(hash, salt);
+            Tuple<string, string> passwordData = BuildPasswordData(hash, salt);
 
-            var restoredHash = Convert.FromBase64String(userEntity.PasswordHash);
-            var restoredSalt = Convert.FromBase64String(userEntity.PasswordSalt);
+            var restoredHash = Convert.FromBase64String(passwordData.Item1);
+            var restoredSalt = Convert.FromBase64String(passwordData.Item2);
 
             // act
             var areChecksValid = PasswordServiceProvider.VerifyPasswordHash(password + " ", restoredHash, restoredSalt);
@@ -103,22 +101,9 @@ namespace AlexDemo.CustomerHub.Core.Application.UnitTests.ServiceProviders
             });
         }
 
-        private User BuildUser(byte[] hash, byte[] salt)
+        private Tuple<string, string> BuildPasswordData(byte[] hash, byte[] salt)
         {
-            var userEntity = new User
-            {
-                Id = 1,
-                DateOfBirth = DateTime.UtcNow.AddYears(-20),
-                Login = "testLogin",
-                PasswordHash = Convert.ToBase64String(hash),
-                PasswordSalt = Convert.ToBase64String(salt),
-                PrimaryOfficeId = 1,
-                UpdatedOn = DateTime.UtcNow,
-                CompanyRole = EmployeeCompanyRole.Manager,
-                Email = "testlogin@testcompany.com"
-            };
-
-            return userEntity;
+            return new Tuple<string, string>(Convert.ToBase64String(hash), Convert.ToBase64String(salt));
         }
     }
 }

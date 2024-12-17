@@ -15,12 +15,14 @@ namespace AlexDemo.CustomerHub.Presentation.APIs.Controllers
             _authenticationService = authenticationService;
         }
 
+        [HttpPost("login")]
         public async Task<ActionResult<AuthResponse>> Login(AuthRequest loginRequest)
         {
             var loginResponse = await _authenticationService.Login(loginRequest);
             return Ok(loginResponse);
         }
 
+        [HttpPost("register")]
         public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest registrationRequest)
         {
             var registrationResponse = await _authenticationService.Register(registrationRequest);

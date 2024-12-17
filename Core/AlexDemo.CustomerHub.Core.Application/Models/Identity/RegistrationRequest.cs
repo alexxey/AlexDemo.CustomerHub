@@ -4,10 +4,6 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.Identity
 {
     public sealed class RegistrationRequest
     {
-        public string? FirstName { get; set; }
-        
-        public string? LastName { get; set; }
-        
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -19,8 +15,5 @@ namespace AlexDemo.CustomerHub.Core.Application.Models.Identity
         [Required]
         [MinLength(8)]
         public string Password { get; set; }
-
-        [Required]
-        public int CompanyId { get; set; }
     }
 }

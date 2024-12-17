@@ -26,10 +26,10 @@ namespace AlexDemo.CustomerHub.Core.Application.Profiles
             CreateMap<CreateCompanyOfficeDto, CompanyOffice>().ReverseMap();
             CreateMap<UpdateCompanyOfficeDto, CompanyOffice>().ReverseMap();
 
-            CreateMap<User, UserDetailsDto>().ReverseMap();
-            CreateMap<User, UserListItemDto>().ReverseMap();
-            CreateMap<CreateUserDto, User>().ReverseMap();
-            CreateMap<UpdateUserDto, User>().ReverseMap();
+            CreateMap<CompanyUser, UserDetailsDto>().ReverseMap();
+            CreateMap<CompanyUser, UserListItemDto>().ReverseMap();
+            CreateMap<CreateUserDto, CompanyUser>().ReverseMap();
+            CreateMap<UpdateUserDto, CompanyUser>().ReverseMap();
 
             // portfolio
             CreateMap<Project, ProjectDetailsDto>().ReverseMap();

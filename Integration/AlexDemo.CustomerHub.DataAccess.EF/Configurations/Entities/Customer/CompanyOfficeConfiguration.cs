@@ -12,11 +12,24 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Configurations.Entities.Customer
         {
             int dynamicCompanyOfficeId = 1;
 
+            var alexDemoHeadOffice = new CompanyOffice
+            {
+                Id = dynamicCompanyOfficeId,
+                OfficeCode = "A-Demo-1",
+                CompanyId = 1, // alexDemo.Id,
+                Country = Country.UnitedKingdom,
+                NumberOfEmployees = 2,
+                IsHeadOffice = true,
+                Name = "AlexDemo",
+                ZipCode = "B94",
+                UpdatedOn = DateTime.UtcNow
+            };
+
             var bentleyHeadOffice = new CompanyOffice
             {
-                Id = dynamicCompanyOfficeId++,
+                Id = ++dynamicCompanyOfficeId,
                 OfficeCode = "BNTL-1",
-                CompanyId = 1, // bentleyCompany.Id,
+                CompanyId = 2, // bentleyCompany.Id,
                 Country = Country.UnitedKingdom,
                 NumberOfEmployees = 4000,
                 IsHeadOffice = true,
@@ -27,9 +40,9 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Configurations.Entities.Customer
 
             var astonMartinHeadOffice = new CompanyOffice
             {
-                Id = dynamicCompanyOfficeId,
+                Id = ++dynamicCompanyOfficeId,
                 OfficeCode = "ASTN-1",
-                CompanyId = 2, //astonMartinCompany.Id,
+                CompanyId = 3, //astonMartinCompany.Id,
                 Country = Country.UnitedKingdom,
                 NumberOfEmployees = 100,
                 IsHeadOffice = true,
@@ -39,6 +52,7 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Configurations.Entities.Customer
             };
 
             modelBuilder.HasData(
+                alexDemoHeadOffice,
                 bentleyHeadOffice,
                 astonMartinHeadOffice
             );

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
+﻿using AlexDemo.CustomerHub.Core.Application.Contracts.Persistence.Customer;
 using AlexDemo.CustomerHub.Core.Application.Models.DTOs.Customer.User;
 using AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Actions.Queries;
 
@@ -19,7 +17,7 @@ namespace AlexDemo.CustomerHub.Core.Application.UseCases.Customer.User.Handlers.
 
         public async Task<List<UserListItemDto>> Handle(GetUsersListRequest request, CancellationToken cancellationToken)
         {
-            List<Entities.Customer.User> usersList = null;
+            List<Entities.Customer.CompanyUser> usersList = null;
             
             if (request.CompanyId > 0)
             {

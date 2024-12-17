@@ -28,7 +28,7 @@ namespace AlexDemo.CustomerHub.Core.Entities.Customer
 
         public List<CompanyOffice> Offices { get; set; } = [];
 
-        public List<User> Users { get; set; } = [];
+        public List<CompanyUser> Users { get; set; } = [];
 
         public List<Project> Projects { get; set; } = [];
     }

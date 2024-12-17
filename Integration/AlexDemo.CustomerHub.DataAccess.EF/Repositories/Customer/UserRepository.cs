@@ -7,22 +7,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlexDemo.CustomerHub.DataAccess.EF.Repositories.Customer
 {
-    public class UserRepository : GenericRepository<User, int>, IUserRepository
+    public class UserRepository : GenericRepository<CompanyUser, int>, IUserRepository
     {
         public UserRepository(CustomerHubDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<List<User>> GetAllByCompany(int companyId)
+        public async Task<List<CompanyUser>> GetAllByCompany(int companyId)
         {
-            return await DbContext.Set<User>()
+            return await DbContext.Set<CompanyUser>()
                 .Where(x => x.Status != Status.Deleted && x.CompanyId == companyId)
                 .ToListAsync();
         }
 
-        public async Task<List<User>> GetAllByCompanyOffice(int companyOfficeId)
+        public async Task<List<CompanyUser>> GetAllByCompanyOffice(int companyOfficeId)
         {
-            return await DbContext.Set<User>()
+            return await DbContext.Set<CompanyUser>()
                 .Where(x => x.Status != Status.Deleted && x.PrimaryOfficeId == companyOfficeId)
                 .ToListAsync();
         }
@@ -30,8 +30,8 @@ namespace AlexDemo.CustomerHub.DataAccess.EF.Repositories.Customer
         public async Task<bool> IsLoginUnique(string createDtoLogin, int createDtoCompanyId)
         {
             // here we do not take into account if login were removed already or not - it stays unique in context of company once created
-            return await DbContext.Set<User>()
-                .FirstOrDefaultAsync(x => x.Login == createDtoLogin && x.CompanyId == createDtoCompanyId) != null;
+            return await DbContext.Set<CompanyUser>()
+                .FirstOrDefaultAsync(x => x.DisplayName == createDtoLogin && x.CompanyId == createDtoCompanyId) != null;
         }
     }
 }
